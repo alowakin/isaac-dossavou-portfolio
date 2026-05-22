@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Digital Page — Isaac D.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:    #f5f5f4;
+      --bg2:   #fafaf9;
+      --bg3:   #eeeeec;
+      --line:  rgba(0,0,0,.1);
+      --accent:#4f8ef7;
+      --white: #111111;
+      --gray:  #737373;
+      --gray2: #d4d4d4;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+      background: var(--bg); color: var(--white);
+      min-height: 100vh;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      opacity: .012;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(245,245,244,.97);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-logo {
+      font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 800;
+      letter-spacing: -.02em; color: var(--white); text-decoration: none;
+    }
+    .nav-logo em { color: var(--accent); font-style: normal; }
+    .nav-back {
+      font-size: .78rem; font-weight: 500; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--gray);
+      text-decoration: none; display: flex; align-items: center; gap: .4rem;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: var(--white); }
+    .nav-back svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* PAGE WRAPPER */
+    .page {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 7rem 1.5rem 5rem;
+      position: relative; z-index: 1;
+    }
+
+    /* PROFILE */
+    .profile {
+      text-align: center; margin-bottom: 3rem;
+      opacity: 0; transform: translateY(24px);
+      animation: slideUp .6s .1s ease forwards;
+    }
+    .avatar {
+      width: 88px; height: 88px; border-radius: 50%;
+      background: var(--bg3);
+      border: 3px solid var(--line);
+      margin: 0 auto 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+    }
+    .avatar svg { width: 40px; height: 40px; fill: var(--gray2); }
+    .profile-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.7rem; font-weight: 800;
+      letter-spacing: -.03em; margin-bottom: .3rem;
+    }
+    .profile-name em { color: var(--accent); font-style: normal; }
+    .profile-bio {
+      font-size: .85rem; color: var(--gray);
+      letter-spacing: .04em;
+    }
+    .profile-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      margin-top: .8rem;
+      font-size: .68rem; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--accent);
+      background: rgba(79,142,247,.1); border: 1px solid rgba(79,142,247,.2);
+      padding: .28rem .75rem; border-radius: 100px;
+    }
+    .profile-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    /* TOGGLE BUTTON */
+    .toggle-wrap {
+      opacity: 0; transform: translateY(20px);
+      animation: slideUp .5s .35s ease forwards;
+      margin-bottom: 2rem;
+    }
+    .btn-toggle {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: .88rem; font-weight: 700;
+      padding: .85rem 2.4rem;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 12px;
+      cursor: pointer; transition: all .25s;
+      display: flex; align-items: center; gap: .6rem;
+      letter-spacing: .02em;
+      box-shadow: 0 4px 20px rgba(79,142,247,.3);
+    }
+    .btn-toggle:hover { background: #3778e5; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(79,142,247,.4); }
+    .btn-toggle svg { width: 18px; height: 18px; fill: currentColor; transition: transform .3s; }
+    .btn-toggle.open svg { transform: rotate(180deg); }
+
+    /* LINKS CONTAINER */
+    .links-container {
+      width: 100%; max-width: 460px;
+      display: flex; flex-direction: column; gap: .75rem;
+      overflow: hidden;
+    }
+
+    /* Individual link cards */
+    .link-card {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.4rem;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      text-decoration: none; color: var(--white);
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s, border-color .2s, background .2s;
+      opacity: 0; transform: translateY(18px);
+      position: relative; overflow: hidden;
+    }
+    .link-card::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+      border-radius: 4px 0 0 4px;
+      background: var(--card-color, var(--accent));
+      opacity: 0; transition: opacity .2s;
+    }
+    .link-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.07); border-color: var(--card-color, var(--accent)); }
+    .link-card:hover::before { opacity: 1; }
+    .link-card:hover .card-icon { background: var(--card-color, var(--accent)); }
+    .link-card:hover .card-icon svg { fill: #fff; }
+    .link-card:hover .card-arrow { border-color: var(--card-color, var(--accent)); background: var(--card-color, var(--accent)); }
+    .link-card:hover .card-arrow svg { fill: #fff; }
+
+    .card-icon {
+      width: 44px; height: 44px; flex-shrink: 0; border-radius: 10px;
+      background: var(--bg3);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .card-icon svg { width: 22px; height: 22px; fill: var(--card-color, var(--gray)); transition: fill .2s; }
+    .card-info { flex: 1; }
+    .card-name { font-size: .92rem; font-weight: 600; margin-bottom: .1rem; }
+    .card-handle { font-size: .75rem; color: var(--gray); }
+    .card-arrow {
+      width: 32px; height: 32px; border-radius: 8px;
+      border: 1px solid var(--gray2);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: all .2s;
+    }
+    .card-arrow svg { width: 14px; height: 14px; fill: var(--gray); transition: fill .2s; }
+
+    /* FEATURED TEST CARD */
+    .link-card.featured {
+      background: linear-gradient(135deg, rgba(79,142,247,.08), rgba(79,142,247,.02));
+      border-color: rgba(79,142,247,.25);
+      padding: 1.3rem 1.4rem;
+    }
+    .link-card.featured:hover { background: linear-gradient(135deg, rgba(79,142,247,.14), rgba(79,142,247,.04)); }
+    .featured-label {
+      position: absolute; top: .7rem; right: .9rem;
+      font-size: .58rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; background: var(--accent); color: #fff;
+      padding: .15rem .5rem; border-radius: 4px;
+    }
+    .card-name.big {
+      font-family: 'Fraunces', serif;
+      font-size: 1.05rem; font-weight: 700; letter-spacing: -.01em;
+    }
+
+    /* SEPARATOR */
+    .separator {
+      opacity: 0; transform: translateY(18px);
+      display: flex; align-items: center; gap: .8rem;
+      width: 100%; max-width: 460px;
+    }
+    .sep-line { flex: 1; height: 1px; background: var(--line); }
+    .sep-label { font-size: .65rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gray2); }
+
+    /* ANIMATION */
+    @keyframes slideUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .link-card.show, .separator.show {
+      animation: slideUp .45s ease forwards;
+    }
+
+    /* FOOTER */
+    .dig-footer {
+      margin-top: 3rem; text-align: center;
+      opacity: 0; animation: slideUp .5s 1.6s ease forwards;
+    }
+    .dig-footer p { font-size: .75rem; color: var(--gray2); }
+    .dig-footer a { color: var(--gray); text-decoration: none; transition: color .2s; }
+    .dig-footer a:hover { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.5rem; }
+      .page { padding: 6rem 1rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Isaac <em>D.</em></a>
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      Portfolio
+    </a>
+  </nav>
+
+  <div class="page">
+
+    <!-- PROFILE -->
+    <div class="profile">
+      <div class="avatar">
+        <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+      </div>
+      <div class="profile-name">Isaac <em>D.</em></div>
+      <div class="profile-bio">Full-Stack Developer · Omaha, NE</div>
+      <span class="profile-badge">My Digital Page</span>
+    </div>
+
+    <!-- TOGGLE BUTTON -->
+    <div class="toggle-wrap">
+      <button class="btn-toggle" id="toggleBtn" onclick="toggleLinks()">
+        <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg>
+        Découvrir
+      </button>
+    </div>
+
+    <!-- LINKS CONTAINER -->
+    <div class="links-container" id="linksContainer">
+
+      <!-- INSTAGRAM -->
+      <a href="#" class="link-card" id="c1" style="--card-color:#E1306C" target="_blank" rel="noopener">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name">Instagram</div>
+          <div class="card-handle">@ton_username</div>
+        </div>
+        <div class="card-arrow">
+          <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </div>
+      </a>
+
+      <!-- TIKTOK -->
+      <a href="#" class="link-card" id="c2" style="--card-color:#010101" target="_blank" rel="noopener">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.27 8.27 0 0 0 4.83 1.56V6.79a4.85 4.85 0 0 1-1.06-.1z"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name">TikTok</div>
+          <div class="card-handle">@ton_username</div>
+        </div>
+        <div class="card-arrow">
+          <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </div>
+      </a>
+
+      <!-- YOUTUBE -->
+      <a href="#" class="link-card" id="c3" style="--card-color:#FF0000" target="_blank" rel="noopener">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name">YouTube</div>
+          <div class="card-handle">@ton_channel</div>
+        </div>
+        <div class="card-arrow">
+          <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </div>
+      </a>
+
+      <!-- FACEBOOK -->
+      <a href="#" class="link-card" id="c4" style="--card-color:#1877F2" target="_blank" rel="noopener">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name">Facebook</div>
+          <div class="card-handle">ton_profil</div>
+        </div>
+        <div class="card-arrow">
+          <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </div>
+      </a>
+
+      <!-- SNAPCHAT -->
+      <a href="#" class="link-card" id="c5" style="--card-color:#FFFC00" target="_blank" rel="noopener">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12.166.006C9.813-.022 5.576.834 3.813 5.01c-.528 1.248-.4 3.398-.4 4.582-.525.264-1.075.389-1.63.373-.48-.014-.965.166-1.317.514-.296.293-.466.68-.466 1.08 0 .755.488 1.414 1.23 1.63.177.053.353.101.519.148.754.213 1.254.454 1.493.715.327.357.361.76.26 1.413-.086.564-.613 1.846-2.117 2.502-.213.091-.318.309-.264.52.121.46.814.797 2.119.989.072.346.14.694.21 1.042.045.23.243.424.494.424.047 0 .093-.005.137-.016.34-.076.698-.158 1.009-.164.328-.006.63.046.904.15.57.215 1.092.684 1.87 1.244.7.512 1.497 1.09 2.642 1.578.4.167.818.25 1.246.25.428 0 .846-.083 1.246-.25 1.145-.488 1.942-1.066 2.642-1.578.778-.56 1.3-1.029 1.87-1.244.274-.104.576-.156.904-.15.311.006.669.088 1.01.164.044.011.09.016.137.016.25 0 .447-.193.492-.424.072-.348.14-.695.212-1.042 1.305-.192 1.998-.529 2.119-.989.053-.211-.052-.428-.266-.52-1.502-.656-2.03-1.937-2.115-2.502-.1-.653-.066-1.056.26-1.413.237-.261.738-.502 1.492-.715.166-.047.343-.095.52-.148.74-.216 1.229-.875 1.229-1.63 0-.4-.17-.787-.466-1.08-.352-.348-.836-.528-1.317-.514-.553.016-1.103-.109-1.628-.373 0-1.184.127-3.334-.4-4.582C18.558.834 14.321-.022 12.166.006z"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name">Snapchat</div>
+          <div class="card-handle">@ton_username</div>
+        </div>
+        <div class="card-arrow">
+          <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </div>
+      </a>
+
+      <!-- SEPARATOR -->
+      <div class="separator" id="sep1">
+        <div class="sep-line"></div>
+        <span class="sep-label">Test</span>
+        <div class="sep-line"></div>
+      </div>
+
+      <!-- ATTACHMENT TEST -->
+      <a href="attachment-test.html" class="link-card featured" id="c6" style="--card-color:#4f8ef7">
+        <span class="featured-label">Psychologie</span>
+        <div class="card-icon" style="background:rgba(79,142,247,.12)">
+          <svg viewBox="0 0 24 24" style="fill:var(--accent)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+        </div>
+        <div class="card-info">
+          <div class="card-name big">Test Style d'Attachement</div>
+          <div class="card-handle">42 questions · Résultat immédiat</div>
+        </div>
+        <div class="card-arrow" style="border-color:rgba(79,142,247,.3)">
+          <svg viewBox="0 0 24 24" style="fill:var(--accent)"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </div>
+      </a>
+
+    </div><!-- /links-container -->
+
+    <!-- FOOTER -->
+    <div class="dig-footer">
+      <p>© 2025 <a href="index.html">Isaac Dossavou</a> · Full-Stack Developer</p>
+    </div>
+
+  </div><!-- /page -->
+
+  <script>
+    const cards  = ['c1','c2','c3','c4','c5','sep1','c6'];
+    let isOpen   = false;
+    let animated = false;
+
+    function toggleLinks() {
+      const btn = document.getElementById('toggleBtn');
+
+      if (!isOpen) {
+        // OPEN — animate cards in sequence
+        isOpen = true;
+        btn.classList.add('open');
+        btn.querySelector('svg').style.transform = 'rotate(180deg)';
+        btn.childNodes[2].textContent = ' Fermer';
+
+        if (!animated) {
+          animated = true;
+          cards.forEach((id, i) => {
+            const el = document.getElementById(id);
+            el.style.animationDelay = `${i * 90}ms`;
+            el.classList.add('show');
+          });
+        } else {
+          // Already animated — just show
+          cards.forEach(id => {
+            const el = document.getElementById(id);
+            el.style.opacity   = '1';
+            el.style.transform = 'translateY(0)';
+          });
+        }
+      } else {
+        // CLOSE
+        isOpen = false;
+        btn.classList.remove('open');
+        btn.querySelector('svg').style.transform = 'rotate(0deg)';
+        btn.childNodes[2].textContent = ' Découvrir';
+
+        [...cards].reverse().forEach((id, i) => {
+          const el = document.getElementById(id);
+          el.style.transition = `opacity .25s ${i * 50}ms, transform .25s ${i * 50}ms`;
+          el.style.opacity    = '0';
+          el.style.transform  = 'translateY(12px)';
+        });
+        // Reset transitions after close
+        setTimeout(() => {
+          cards.forEach(id => {
+            document.getElementById(id).style.transition = '';
+          });
+        }, 600);
+      }
+    }
+  </script>
+</body>
+</html>
