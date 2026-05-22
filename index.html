@@ -70,6 +70,88 @@
     }
     .nav-cta:hover { opacity: .85; }
 
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none; flex-direction: column; justify-content: center;
+      gap: 5px; width: 36px; height: 36px; cursor: pointer;
+      background: none; border: none; padding: 4px; z-index: 200;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--white); border-radius: 2px;
+      transition: transform .3s, opacity .3s, width .3s;
+      transform-origin: center;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; width: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 150;
+      background: rgba(245,245,244,.98);
+      backdrop-filter: blur(20px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s ease;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+
+    .mobile-menu ul {
+      list-style: none; display: flex; flex-direction: column;
+      align-items: center; gap: .25rem; width: 100%; padding: 0 2rem;
+    }
+    .mobile-menu ul li { width: 100%; text-align: center; }
+    .mobile-menu ul a {
+      display: block; padding: 1.1rem 1rem;
+      font-size: 1.3rem; font-family: 'Fraunces', serif;
+      font-weight: 700; letter-spacing: -.02em;
+      color: var(--white); text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      transition: color .2s;
+      opacity: 0; transform: translateY(16px);
+      transition: color .2s, opacity .3s, transform .3s;
+    }
+    .mobile-menu.open ul a {
+      opacity: 1; transform: translateY(0);
+    }
+    .mobile-menu ul li:nth-child(1) a { transition-delay: .05s; }
+    .mobile-menu ul li:nth-child(2) a { transition-delay: .1s; }
+    .mobile-menu ul li:nth-child(3) a { transition-delay: .15s; }
+    .mobile-menu ul li:nth-child(4) a { transition-delay: .2s; }
+    .mobile-menu ul li:nth-child(5) a { transition-delay: .25s; }
+    .mobile-menu ul a:hover, .mobile-menu ul a:active { color: var(--accent); }
+    .mobile-menu .mob-cta {
+      margin-top: 1.5rem;
+      display: inline-block; padding: .9rem 2.5rem;
+      background: var(--accent); color: var(--bg) !important;
+      font-size: .85rem !important; font-weight: 700;
+      font-family: 'Instrument Sans', sans-serif !important;
+      letter-spacing: .08em; text-transform: uppercase;
+      text-decoration: none; border-bottom: none !important;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity .3s .3s, transform .3s .3s, background .2s !important;
+    }
+    .mobile-menu.open .mob-cta { opacity: 1; transform: translateY(0); }
+    .mobile-menu .mob-cta:hover { background: #3778e5 !important; color: #fff !important; }
+
+    .mob-lang {
+      display: flex; gap: .6rem; margin-top: 2rem;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity .3s .35s, transform .3s .35s;
+    }
+    .mobile-menu.open .mob-lang { opacity: 1; transform: translateY(0); }
+    .mob-lang button {
+      background: none; border: 1px solid var(--gray2);
+      color: var(--gray); padding: .3rem .8rem;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: .72rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; cursor: pointer; transition: all .2s;
+    }
+    .mob-lang button.active { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+
     /* Language toggle */
     .lang-toggle {
       display: flex; align-items: center; gap: .5rem;
@@ -510,6 +592,8 @@
     @media(max-width: 900px) {
       nav { padding: 1.2rem 1.5rem; }
       .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .lang-toggle { display: none; }
       .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; gap: 3rem; }
       .hero-right { order: -1; }
       .about-inner { grid-template-columns: 1fr; gap: 3rem; }
@@ -537,7 +621,25 @@
     <button class="lang-btn active" onclick="setLang('en')">EN</button>
     <button class="lang-btn" onclick="setLang('fr')">FR</button>
   </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#about" onclick="closeMobileMenu()" data-en="About" data-fr="À propos">About</a></li>
+    <li><a href="#projects" onclick="closeMobileMenu()" data-en="Projects" data-fr="Projets">Projects</a></li>
+    <li><a href="#services" onclick="closeMobileMenu()" data-en="Services" data-fr="Services">Services</a></li>
+    <li><a href="digital-page.html" onclick="closeMobileMenu()" data-en="My Digital Page" data-fr="Ma page digitale">My Digital Page</a></li>
+  </ul>
+  <a href="#contact" class="mob-cta" onclick="closeMobileMenu()" data-en="Hire Me" data-fr="Me contacter">Hire Me</a>
+  <div class="mob-lang">
+    <button id="mob-btn-en" class="active" onclick="setLang('en');closeMobileMenu()">EN</button>
+    <button id="mob-btn-fr" onclick="setLang('fr');closeMobileMenu()">FR</button>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="home">
@@ -893,12 +995,31 @@
 </footer>
 
 <script>
+  // ── MOBILE MENU ──
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn  = document.getElementById('hamburger');
+    const open = menu.classList.toggle('open');
+    btn.classList.toggle('active', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
   // ── LANG TOGGLE ──
   let currentLang = 'en';
   function setLang(lang) {
     currentLang = lang;
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`)?.classList.add('active');
+    // Sync mobile lang buttons
+    ['en','fr'].forEach(l => {
+      const b = document.getElementById(`mob-btn-${l}`);
+      if (b) b.classList.toggle('active', l === lang);
+    });
     document.querySelectorAll('[data-en]').forEach(el => {
       const text = el.getAttribute('data-' + lang);
       if (text) el.innerHTML = text;
