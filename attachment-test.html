@@ -3,35 +3,30 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Test Style d'Attachement</title>
+  <title>Test Style d'Attachement / Attachment Style Test</title>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,300&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg:      #f5f5f4;
-      --bg2:     #fafaf9;
-      --bg3:     #eeeeec;
-      --line:    rgba(0,0,0,.1);
-      --accent:  #4f8ef7;
-      --white:   #111111;
-      --gray:    #737373;
-      --gray2:   #d4d4d4;
-      --col-a:   #e05252;
-      --col-b:   #4f8ef7;
-      --col-c:   #5aab6b;
+      --bg:    #f5f5f4;
+      --bg2:   #fafaf9;
+      --bg3:   #eeeeec;
+      --line:  rgba(0,0,0,.1);
+      --accent:#4f8ef7;
+      --white: #111111;
+      --gray:  #737373;
+      --gray2: #d4d4d4;
+      --col-a: #e05252;
+      --col-b: #4f8ef7;
+      --col-c: #5aab6b;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
     body {
       font-family: 'Instrument Sans', sans-serif;
-      background: var(--bg);
-      color: var(--white);
-      overflow-x: hidden;
+      background: var(--bg); color: var(--white); overflow-x: hidden;
     }
-
     body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
       opacity: .012;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       background-size: 200px;
@@ -47,10 +42,8 @@
       border-bottom: 1px solid var(--line);
     }
     .nav-logo {
-      font-family: 'Fraunces', serif;
-      font-size: 1.1rem; font-weight: 800;
-      letter-spacing: -.02em; color: var(--white);
-      text-decoration: none;
+      font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 800;
+      letter-spacing: -.02em; color: var(--white); text-decoration: none;
     }
     .nav-logo em { color: var(--accent); font-style: normal; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
@@ -60,13 +53,18 @@
       text-transform: uppercase; transition: color .2s;
     }
     .nav-links a:hover { color: var(--white); }
+    .lang-toggle { display: flex; align-items: center; gap: .5rem; }
+    .lang-btn {
+      background: none; border: 1px solid var(--gray2);
+      color: var(--gray); padding: .25rem .6rem;
+      font-family: 'Instrument Sans', sans-serif; font-size: .68rem;
+      font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      cursor: pointer; transition: all .2s;
+    }
+    .lang-btn.active { background: var(--accent); border-color: var(--accent); color: var(--bg); }
 
     /* HERO */
-    .hero {
-      padding: 9rem 3rem 2.5rem;
-      max-width: 920px; margin: 0 auto;
-      position: relative; z-index: 1;
-    }
+    .hero { padding: 9rem 3rem 2.5rem; max-width: 920px; margin: 0 auto; position: relative; z-index: 1; }
     .hero-tag {
       display: inline-flex; align-items: center; gap: .5rem;
       font-size: .75rem; font-weight: 600; letter-spacing: .1em;
@@ -77,60 +75,26 @@
     .hero h1 {
       font-family: 'Fraunces', serif;
       font-size: clamp(2.4rem, 5vw, 3.6rem);
-      font-weight: 700; line-height: 1.08;
-      letter-spacing: -.035em; margin-bottom: 1rem;
+      font-weight: 700; line-height: 1.08; letter-spacing: -.035em; margin-bottom: 1rem;
     }
     .hero h1 em { color: var(--accent); font-style: italic; }
-    .hero p {
-      font-size: 1.05rem; color: var(--gray);
-      line-height: 1.75; max-width: 600px;
-    }
+    .hero p { font-size: 1.05rem; color: var(--gray); line-height: 1.75; max-width: 600px; }
 
-    /* MAIN CARD */
-    .questionnaire {
-      max-width: 920px; margin: 0 auto 4rem;
-      padding: 0 3rem;
-      position: relative; z-index: 1;
-    }
-    .card {
-      background: var(--bg2);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      overflow: hidden;
-    }
-    .card-header {
-      padding: 2rem 2.5rem;
-      border-bottom: 1px solid var(--line);
-      background: var(--bg3);
-    }
-    .card-header h2 {
-      font-family: 'Fraunces', serif;
-      font-size: 1.25rem; font-weight: 700;
-      letter-spacing: -.02em; margin-bottom: .4rem;
-    }
+    /* CARD */
+    .questionnaire { max-width: 920px; margin: 0 auto 4rem; padding: 0 3rem; position: relative; z-index: 1; }
+    .card { background: var(--bg2); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+    .card-header { padding: 2rem 2.5rem; border-bottom: 1px solid var(--line); background: var(--bg3); }
+    .card-header h2 { font-family: 'Fraunces', serif; font-size: 1.25rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: .4rem; }
     .card-header p { font-size: .88rem; color: var(--gray); line-height: 1.6; }
 
     /* LIVE COUNTERS */
-    .score-bar {
-      display: flex; gap: 1.5rem;
-      padding: 1rem 2.5rem;
-      border-bottom: 1px solid var(--line);
-      background: var(--bg2);
-    }
-    .score-pill {
-      display: flex; align-items: center; gap: .55rem;
-      font-size: .82rem; font-weight: 600;
-    }
+    .score-bar { display: flex; gap: 1.5rem; padding: 1rem 2.5rem; border-bottom: 1px solid var(--line); background: var(--bg2); }
+    .score-pill { display: flex; align-items: center; gap: .55rem; font-size: .82rem; font-weight: 600; }
     .pill-dot { width: 9px; height: 9px; border-radius: 50%; }
     .score-pill.pa .pill-dot { background: var(--col-a); }
     .score-pill.pb .pill-dot { background: var(--col-b); }
     .score-pill.pc .pill-dot { background: var(--col-c); }
-    .pill-num {
-      min-width: 26px; text-align: center;
-      background: var(--bg3); border-radius: 5px;
-      padding: .1rem .45rem;
-      font-variant-numeric: tabular-nums;
-    }
+    .pill-num { min-width: 26px; text-align: center; background: var(--bg3); border-radius: 5px; padding: .1rem .45rem; font-variant-numeric: tabular-nums; }
     .score-pill.pa .pill-num { color: var(--col-a); }
     .score-pill.pb .pill-num { color: var(--col-b); }
     .score-pill.pc .pill-num { color: var(--col-c); }
@@ -138,12 +102,9 @@
     /* TABLE */
     .q-table { width: 100%; border-collapse: collapse; }
     .q-table thead th {
-      padding: .9rem 1rem;
-      font-size: .72rem; font-weight: 700;
-      letter-spacing: .09em; text-transform: uppercase;
-      color: var(--gray); background: var(--bg3);
-      border-bottom: 2px solid var(--line);
-      text-align: center;
+      padding: .9rem 1rem; font-size: .72rem; font-weight: 700;
+      letter-spacing: .09em; text-transform: uppercase; color: var(--gray);
+      background: var(--bg3); border-bottom: 2px solid var(--line); text-align: center;
     }
     .q-table thead th.col-stmt { text-align: left; }
     .q-table thead th.col-num  { width: 46px; }
@@ -158,161 +119,94 @@
     .q-table tbody tr.row-c { background: rgba(90,171,107,.05); }
 
     .q-table td { padding: .82rem 1rem; font-size: .88rem; vertical-align: middle; }
-    .q-table td.td-num {
-      text-align: center; color: var(--gray);
-      font-size: .78rem; font-weight: 600;
-      font-variant-numeric: tabular-nums;
-    }
+    .q-table td.td-num { text-align: center; color: var(--gray); font-size: .78rem; font-weight: 600; font-variant-numeric: tabular-nums; }
     .q-table td.td-stmt { line-height: 1.55; }
     .q-table td.td-cb  { text-align: center; }
 
     /* CUSTOM CHECKBOX */
     .cb-wrap { display: flex; align-items: center; justify-content: center; }
     .cb-wrap input[type="checkbox"] {
-      width: 21px; height: 21px;
-      appearance: none; -webkit-appearance: none;
-      border: 2px solid var(--gray2);
-      border-radius: 5px;
-      background: #fff;
-      cursor: pointer;
-      transition: border-color .15s, background .15s;
-      position: relative;
+      width: 21px; height: 21px; appearance: none; -webkit-appearance: none;
+      border: 2px solid var(--gray2); border-radius: 5px; background: #fff;
+      cursor: pointer; transition: border-color .15s, background .15s; position: relative;
     }
     .cb-a input[type="checkbox"]:hover { border-color: var(--col-a); }
     .cb-b input[type="checkbox"]:hover { border-color: var(--col-b); }
     .cb-c input[type="checkbox"]:hover { border-color: var(--col-c); }
-
     .cb-a input[type="checkbox"]:checked { background: var(--col-a); border-color: var(--col-a); }
     .cb-b input[type="checkbox"]:checked { background: var(--col-b); border-color: var(--col-b); }
     .cb-c input[type="checkbox"]:checked { background: var(--col-c); border-color: var(--col-c); }
-
     .cb-wrap input[type="checkbox"]:checked::after {
-      content: '';
-      position: absolute;
-      top: 2px; left: 6px;
-      width: 5px; height: 9px;
-      border: 2px solid #fff;
-      border-top: none; border-left: none;
-      transform: rotate(45deg);
+      content: ''; position: absolute; top: 2px; left: 6px;
+      width: 5px; height: 9px; border: 2px solid #fff;
+      border-top: none; border-left: none; transform: rotate(45deg);
     }
 
-    /* FOOTER OF CARD */
+    /* CARD FOOTER */
     .card-footer {
-      padding: 1.8rem 2.5rem;
-      display: flex; align-items: center; justify-content: space-between;
-      border-top: 2px solid var(--line);
-      background: var(--bg3);
-      flex-wrap: wrap; gap: 1rem;
+      padding: 1.8rem 2.5rem; display: flex; align-items: center; justify-content: space-between;
+      border-top: 2px solid var(--line); background: var(--bg3); flex-wrap: wrap; gap: 1rem;
     }
     .footer-hint { font-size: .83rem; color: var(--gray); }
     .btn-submit {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: .95rem; font-weight: 600;
-      padding: .85rem 2.2rem;
-      background: var(--accent); color: #fff;
-      border: none; border-radius: 10px;
-      cursor: pointer; transition: all .2s;
-      letter-spacing: .01em;
+      font-family: 'Instrument Sans', sans-serif; font-size: .95rem; font-weight: 600;
+      padding: .85rem 2.2rem; background: var(--accent); color: #fff;
+      border: none; border-radius: 10px; cursor: pointer; transition: all .2s; letter-spacing: .01em;
     }
     .btn-submit:hover { background: #3778e5; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(79,142,247,.35); }
 
-    /* RESULT SECTION */
-    .result-wrap {
-      max-width: 920px; margin: 0 auto 6rem;
-      padding: 0 3rem;
-      position: relative; z-index: 1;
-      display: none;
-    }
+    /* RESULT */
+    .result-wrap { max-width: 920px; margin: 0 auto 6rem; padding: 0 3rem; position: relative; z-index: 1; display: none; }
     .result-wrap.on { display: block; }
+    .result-card { border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
 
-    .result-card {
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .result-top {
-      padding: 3rem 3rem 2.5rem;
-      text-align: center;
-    }
+    .result-top { padding: 3rem 3rem 2.5rem; text-align: center; }
     .result-top.anxious  { background: linear-gradient(150deg, rgba(224,82,82,.1), rgba(224,82,82,.02)); border-bottom: 1px solid rgba(224,82,82,.18); }
     .result-top.secure   { background: linear-gradient(150deg, rgba(79,142,247,.1), rgba(79,142,247,.02)); border-bottom: 1px solid rgba(79,142,247,.18); }
     .result-top.avoidant { background: linear-gradient(150deg, rgba(90,171,107,.1), rgba(90,171,107,.02)); border-bottom: 1px solid rgba(90,171,107,.18); }
 
-    .rt-eyebrow {
-      font-size: .7rem; font-weight: 700; letter-spacing: .15em;
-      text-transform: uppercase; margin-bottom: .9rem;
-    }
+    .rt-eyebrow { font-size: .7rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; margin-bottom: .9rem; }
     .rt-eyebrow.anxious  { color: var(--col-a); }
     .rt-eyebrow.secure   { color: var(--col-b); }
     .rt-eyebrow.avoidant { color: var(--col-c); }
 
-    .rt-name {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700; letter-spacing: -.03em;
-      margin-bottom: .2rem;
-    }
+    .rt-name { font-family: 'Fraunces', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -.03em; margin-bottom: .2rem; }
     .rt-name.anxious  { color: var(--col-a); }
     .rt-name.secure   { color: var(--col-b); }
     .rt-name.avoidant { color: var(--col-c); }
 
     .rt-sub { font-size: .95rem; color: var(--gray); margin-bottom: 2.2rem; }
 
-    /* SCORE BARS */
     .score-visuals { display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap; }
     .sv-item { text-align: center; min-width: 90px; }
-    .sv-label {
-      display: block; font-size: .7rem; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase;
-      margin-bottom: .6rem;
-    }
+    .sv-label { display: block; font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .6rem; }
     .sv-item.sa .sv-label { color: var(--col-a); }
     .sv-item.sb .sv-label { color: var(--col-b); }
     .sv-item.sc .sv-label { color: var(--col-c); }
-
     .sv-track { width: 90px; height: 7px; background: var(--bg3); border-radius: 100px; overflow: hidden; margin: 0 auto .5rem; }
     .sv-fill { height: 100%; border-radius: 100px; transition: width .7s cubic-bezier(.22,1,.36,1); }
     .sv-item.sa .sv-fill { background: var(--col-a); }
     .sv-item.sb .sv-fill { background: var(--col-b); }
     .sv-item.sc .sv-fill { background: var(--col-c); }
-
     .sv-num { font-size: 1.3rem; font-weight: 700; font-variant-numeric: tabular-nums; }
     .sv-item.sa .sv-num { color: var(--col-a); }
     .sv-item.sb .sv-num { color: var(--col-b); }
     .sv-item.sc .sv-num { color: var(--col-c); }
 
-    /* RESULT DESCRIPTION */
-    .result-desc {
-      padding: 2.5rem 3rem;
-      background: var(--bg2);
-    }
-    .result-desc h3 {
-      font-family: 'Fraunces', serif;
-      font-size: 1.2rem; font-weight: 700;
-      letter-spacing: -.02em; margin-bottom: 1.1rem;
-    }
-    .result-desc p {
-      font-size: .92rem; color: var(--gray);
-      line-height: 1.82; margin-bottom: .9rem;
-    }
+    .result-desc { padding: 2.5rem 3rem; background: var(--bg2); }
+    .result-desc h3 { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: 1.1rem; }
+    .result-desc p { font-size: .92rem; color: var(--gray); line-height: 1.82; margin-bottom: .9rem; }
     .result-desc p:last-child { margin-bottom: 0; }
 
     .result-foot {
-      padding: 1.4rem 3rem;
-      background: var(--bg3);
-      border-top: 1px solid var(--line);
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1rem;
+      padding: 1.4rem 3rem; background: var(--bg3); border-top: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
     }
     .result-foot cite { font-size: .78rem; color: var(--gray); font-style: normal; }
     .btn-retry {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: .85rem; font-weight: 600;
-      padding: .65rem 1.5rem;
-      background: transparent; color: var(--accent);
-      border: 1.5px solid var(--accent); border-radius: 8px;
-      cursor: pointer; transition: all .18s;
+      font-family: 'Instrument Sans', sans-serif; font-size: .85rem; font-weight: 600;
+      padding: .65rem 1.5rem; background: transparent; color: var(--accent);
+      border: 1.5px solid var(--accent); border-radius: 8px; cursor: pointer; transition: all .18s;
     }
     .btn-retry:hover { background: var(--accent); color: #fff; }
 
@@ -337,33 +231,43 @@
       <li><a href="index.html#about">About</a></li>
       <li><a href="index.html#contact">Contact</a></li>
     </ul>
+    <div class="lang-toggle">
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+    </div>
   </nav>
 
   <section class="hero">
-    <span class="hero-tag">Psychologie · Relations</span>
-    <h1>Test Style <em>d'Attachement</em></h1>
-    <p>Cochez les affirmations qui sont <strong>VRAIES</strong> pour vous. Répondez honnêtement — il n'y a pas de bonne ou mauvaise réponse. À la fin, votre style dominant sera révélé.</p>
+    <span class="hero-tag" data-en="Psychology · Relationships" data-fr="Psychologie · Relations">Psychologie · Relations</span>
+    <h1 data-en="Attachment <em>Style Test</em>" data-fr="Test Style <em>d'Attachement</em>">Test Style <em>d'Attachement</em></h1>
+    <p data-en="Check the statements that are TRUE for you. Answer honestly — there are no right or wrong answers. At the end, your dominant style will be revealed." data-fr="Cochez les affirmations qui sont VRAIES pour vous. Répondez honnêtement — il n'y a pas de bonne ou mauvaise réponse. À la fin, votre style dominant sera révélé.">
+      Cochez les affirmations qui sont <strong>VRAIES</strong> pour vous. Répondez honnêtement — il n'y a pas de bonne ou mauvaise réponse. À la fin, votre style dominant sera révélé.
+    </p>
   </section>
 
   <section class="questionnaire">
     <div class="card">
-
       <div class="card-header">
         <h2>Attachment Style Questionnaire</h2>
-        <p>Cochez la case si l'affirmation est vraie pour vous. Comptez ensuite le nombre de cases cochées dans chaque colonne (A, B ou C) pour découvrir votre style d'attachement.</p>
+        <p data-en="Check the box if the statement is TRUE for you. At the end, click &ldquo;See my result&rdquo; to discover your attachment style." data-fr="Cochez la case si l'affirmation est vraie pour vous. À la fin, cliquez sur &ldquo;Voir mon résultat&rdquo; pour découvrir votre style d'attachement.">
+          Cochez la case si l'affirmation est vraie pour vous. À la fin, cliquez sur &ldquo;Voir mon résultat&rdquo; pour découvrir votre style d'attachement.
+        </p>
       </div>
 
       <div class="score-bar">
         <span class="score-pill pa">
-          <span class="pill-dot"></span>A — Anxieux
+          <span class="pill-dot"></span>
+          <span>A</span>
           <span class="pill-num" id="cnt-a">0</span>
         </span>
         <span class="score-pill pb">
-          <span class="pill-dot"></span>B — Confiant
+          <span class="pill-dot"></span>
+          <span>B</span>
           <span class="pill-num" id="cnt-b">0</span>
         </span>
         <span class="score-pill pc">
-          <span class="pill-dot"></span>C — Évitant
+          <span class="pill-dot"></span>
+          <span>C</span>
           <span class="pill-num" id="cnt-c">0</span>
         </span>
       </div>
@@ -372,7 +276,7 @@
         <thead>
           <tr>
             <th class="col-num">#</th>
-            <th class="col-stmt">Affirmation</th>
+            <th class="col-stmt" data-en="Statement" data-fr="Affirmation">Affirmation</th>
             <th class="col-a">A</th>
             <th class="col-b">B</th>
             <th class="col-c">C</th>
@@ -382,8 +286,8 @@
       </table>
 
       <div class="card-footer">
-        <p class="footer-hint">42 affirmations &nbsp;·&nbsp; Résultat immédiat</p>
-        <button class="btn-submit" onclick="showResult()">Voir mon résultat →</button>
+        <p class="footer-hint" data-en="42 statements · Instant result" data-fr="42 affirmations · Résultat immédiat">42 affirmations · Résultat immédiat</p>
+        <button class="btn-submit" id="btn-submit" onclick="showResult()">Voir mon résultat →</button>
       </div>
     </div>
   </section>
@@ -391,124 +295,147 @@
   <section class="result-wrap" id="result-wrap">
     <div class="result-card">
       <div class="result-top" id="result-top">
-        <div class="rt-eyebrow" id="rt-eyebrow">Style d'attachement</div>
-        <div class="rt-name"   id="rt-name"></div>
-        <div class="rt-sub"    id="rt-sub"></div>
+        <div class="rt-eyebrow" id="rt-eyebrow"></div>
+        <div class="rt-name"    id="rt-name"></div>
+        <div class="rt-sub"     id="rt-sub"></div>
         <div class="score-visuals">
           <div class="sv-item sa">
-            <span class="sv-label">A — Anxieux</span>
+            <span class="sv-label" data-en="A — Anxious" data-fr="A — Anxieux">A — Anxieux</span>
             <div class="sv-track"><div class="sv-fill" id="bar-a" style="width:0%"></div></div>
             <span class="sv-num" id="num-a">0</span>
           </div>
           <div class="sv-item sb">
-            <span class="sv-label">B — Confiant</span>
+            <span class="sv-label" data-en="B — Secure" data-fr="B — Confiant">B — Confiant</span>
             <div class="sv-track"><div class="sv-fill" id="bar-b" style="width:0%"></div></div>
             <span class="sv-num" id="num-b">0</span>
           </div>
           <div class="sv-item sc">
-            <span class="sv-label">C — Évitant</span>
+            <span class="sv-label" data-en="C — Avoidant" data-fr="C — Évitant">C — Évitant</span>
             <div class="sv-track"><div class="sv-fill" id="bar-c" style="width:0%"></div></div>
             <span class="sv-num" id="num-c">0</span>
           </div>
         </div>
       </div>
-      <div class="result-desc" id="result-desc">
+      <div class="result-desc">
         <h3 id="desc-title"></h3>
         <p  id="desc-p1"></p>
         <p  id="desc-p2"></p>
       </div>
       <div class="result-foot">
-        <cite>*Adapté du questionnaire ECR-R de Fraley, Waller et Brennan (2000)</cite>
-        <button class="btn-retry" onclick="resetTest()">↺ Recommencer</button>
+        <cite data-en="*Adapted from Fraley, Waller &amp; Brennan's (2000) ECR-R Questionnaire" data-fr="*Adapté du questionnaire ECR-R de Fraley, Waller et Brennan (2000)">
+          *Adapté du questionnaire ECR-R de Fraley, Waller et Brennan (2000)
+        </cite>
+        <button class="btn-retry" id="btn-retry" onclick="resetTest()">↺ Recommencer</button>
       </div>
     </div>
   </section>
 
   <script>
+    let LANG = 'fr';
+
     const QUESTIONS = [
-      { n:1,  t:'a', s:"I often worry that my partner will stop loving me." },
-      { n:2,  t:'b', s:"I find it easy to be affectionate with my partner." },
-      { n:3,  t:'a', s:"I fear that once someone gets to know the real me, s/he won't like who I am." },
-      { n:4,  t:'c', s:"I find that I bounce back quickly after a breakup. It's weird how I can just put someone out of my mind." },
-      { n:5,  t:'a', s:"When I'm not involved in a relationship, I feel somewhat anxious and incomplete." },
-      { n:6,  t:'c', s:"I find it difficult to emotionally support my partner when s/he is feeling down." },
-      { n:7,  t:'a', s:"When my partner is away, I'm afraid that s/he might become interested in someone else." },
-      { n:8,  t:'b', s:"I feel comfortable depending on romantic partners." },
-      { n:9,  t:'c', s:"My independence is more important to me than my relationships." },
-      { n:10, t:'c', s:"I prefer not to share my innermost feelings with my partner." },
-      { n:11, t:'a', s:"When I show my partner how I feel, I'm afraid s/he will not feel the same about me." },
-      { n:12, t:'b', s:"I am generally satisfied with my romantic relationships." },
-      { n:13, t:'b', s:"I don't feel the need to act out much in my romantic relationships." },
-      { n:14, t:'a', s:"I think about my relationships a lot." },
-      { n:15, t:'c', s:"I find it difficult to depend on romantic partners." },
-      { n:16, t:'a', s:"I tend to get very quickly attached to a romantic partner." },
-      { n:17, t:'b', s:"I have little difficulty expressing my needs and wants to my partner." },
-      { n:18, t:'a', s:"I sometimes feel angry or annoyed with my partner without knowing why." },
-      { n:19, t:'a', s:"I am very sensitive to my partner's moods." },
-      { n:20, t:'b', s:"I believe most people are essentially honest and dependable." },
-      { n:21, t:'c', s:"I prefer casual sex with uncommitted partners to intimate sex with one person." },
-      { n:22, t:'b', s:"I'm comfortable sharing my personal thoughts and feelings with my partner." },
-      { n:23, t:'a', s:"I worry that if my partner leaves me I might never find someone else." },
-      { n:24, t:'c', s:"It makes me nervous when my partner gets too close." },
-      { n:25, t:'a', s:"During a conflict, I tend to impulsively do or say things I later regret, rather than be able to reason about things." },
-      { n:26, t:'b', s:"An argument with my partner doesn't usually cause me to question our entire relationship." },
-      { n:27, t:'c', s:"My partners often want me to be more intimate than I feel comfortable being." },
-      { n:28, t:'a', s:"I worry that I'm not attractive enough." },
-      { n:29, t:'b', s:"Sometimes people see me as boring because I create little drama in relationships." },
-      { n:30, t:'a', s:"I miss my partner when we're apart, but then when we're together I feel the need to escape." },
-      { n:31, t:'b', s:"When I disagree with someone, I feel comfortable expressing my opinions." },
-      { n:32, t:'c', s:"I hate feeling that other people depend on me." },
-      { n:33, t:'b', s:"If I notice that someone I'm interested in is checking out other people, I don't let it faze me. I might feel a pang of jealousy, but it's fleeting." },
-      { n:34, t:'c', s:"If I notice that someone I'm interested in is checking out other people, I feel relieved—it means s/he's not looking to make things exclusive." },
-      { n:35, t:'a', s:"If I notice that someone I'm interested in is checking out other people, it makes me feel depressed." },
-      { n:36, t:'b', s:"If someone I've been dating begins to act cold and distant, I may wonder what's happened, but I'll know it's probably not about me." },
-      { n:37, t:'c', s:"If someone I've been dating begins to act cold and distant, I'll probably be indifferent; I might even be relieved." },
-      { n:38, t:'a', s:"If someone I've been dating begins to act cold and distant, I'll worry that I've done something wrong." },
-      { n:39, t:'a', s:"If my partner was to break up with me, I'd try my best to show her/him what s/he is missing (a little jealousy can't hurt)." },
-      { n:40, t:'b', s:"If someone I've been dating for several months tells me s/he wants to stop seeing me, I'd feel hurt at first, but I'd get over it." },
-      { n:41, t:'a', s:"Sometimes when I get what I want in a relationship, I'm not sure what I want anymore." },
-      { n:42, t:'b', s:"I won't have much of a problem staying in touch with my ex (strictly platonic)—after all, we have a lot in common." },
+      { n:1,  t:'a', en:"I often worry that my partner will stop loving me.", fr:"Je m'inquiète souvent que mon/ma partenaire cesse de m'aimer." },
+      { n:2,  t:'b', en:"I find it easy to be affectionate with my partner.", fr:"Je trouve facile d'être affectueux/affectueuse avec mon/ma partenaire." },
+      { n:3,  t:'a', en:"I fear that once someone gets to know the real me, s/he won't like who I am.", fr:"Je crains que lorsqu'on me connaît vraiment, on n'aime pas qui je suis." },
+      { n:4,  t:'c', en:"I find that I bounce back quickly after a breakup. It's weird how I can just put someone out of my mind.", fr:"Je remarque que je me remets rapidement d'une rupture. C'est étrange comme je peux effacer quelqu'un de mon esprit." },
+      { n:5,  t:'a', en:"When I'm not involved in a relationship, I feel somewhat anxious and incomplete.", fr:"Quand je ne suis pas en relation, je me sens un peu anxieux/anxieuse et incomplet(e)." },
+      { n:6,  t:'c', en:"I find it difficult to emotionally support my partner when s/he is feeling down.", fr:"J'ai du mal à soutenir émotionnellement mon/ma partenaire quand il/elle ne va pas bien." },
+      { n:7,  t:'a', en:"When my partner is away, I'm afraid that s/he might become interested in someone else.", fr:"Quand mon/ma partenaire est absent(e), j'ai peur qu'il/elle s'intéresse à quelqu'un d'autre." },
+      { n:8,  t:'b', en:"I feel comfortable depending on romantic partners.", fr:"Je me sens à l'aise de dépendre de mes partenaires amoureux/amoureuses." },
+      { n:9,  t:'c', en:"My independence is more important to me than my relationships.", fr:"Mon indépendance est plus importante pour moi que mes relations." },
+      { n:10, t:'c', en:"I prefer not to share my innermost feelings with my partner.", fr:"Je préfère ne pas partager mes sentiments les plus profonds avec mon/ma partenaire." },
+      { n:11, t:'a', en:"When I show my partner how I feel, I'm afraid s/he will not feel the same about me.", fr:"Quand je montre mes sentiments à mon/ma partenaire, j'ai peur qu'il/elle ne ressente pas la même chose." },
+      { n:12, t:'b', en:"I am generally satisfied with my romantic relationships.", fr:"Je suis généralement satisfait(e) de mes relations amoureuses." },
+      { n:13, t:'b', en:"I don't feel the need to act out much in my romantic relationships.", fr:"Je ne ressens pas le besoin de créer des drames dans mes relations amoureuses." },
+      { n:14, t:'a', en:"I think about my relationships a lot.", fr:"Je pense beaucoup à mes relations." },
+      { n:15, t:'c', en:"I find it difficult to depend on romantic partners.", fr:"J'ai du mal à dépendre de mes partenaires amoureux/amoureuses." },
+      { n:16, t:'a', en:"I tend to get very quickly attached to a romantic partner.", fr:"J'ai tendance à m'attacher très rapidement à un(e) partenaire." },
+      { n:17, t:'b', en:"I have little difficulty expressing my needs and wants to my partner.", fr:"J'ai peu de mal à exprimer mes besoins et envies à mon/ma partenaire." },
+      { n:18, t:'a', en:"I sometimes feel angry or annoyed with my partner without knowing why.", fr:"Je me sens parfois en colère ou irrité(e) contre mon/ma partenaire sans savoir pourquoi." },
+      { n:19, t:'a', en:"I am very sensitive to my partner's moods.", fr:"Je suis très sensible à l'humeur de mon/ma partenaire." },
+      { n:20, t:'b', en:"I believe most people are essentially honest and dependable.", fr:"Je pense que la plupart des gens sont fondamentalement honnêtes et fiables." },
+      { n:21, t:'c', en:"I prefer casual sex with uncommitted partners to intimate sex with one person.", fr:"Je préfère des relations sans engagement à une relation intime avec une seule personne." },
+      { n:22, t:'b', en:"I'm comfortable sharing my personal thoughts and feelings with my partner.", fr:"Je suis à l'aise pour partager mes pensées et sentiments personnels avec mon/ma partenaire." },
+      { n:23, t:'a', en:"I worry that if my partner leaves me I might never find someone else.", fr:"Je m'inquiète que si mon/ma partenaire me quitte, je ne trouverai peut-être jamais quelqu'un d'autre." },
+      { n:24, t:'c', en:"It makes me nervous when my partner gets too close.", fr:"Cela m'angoisse quand mon/ma partenaire se rapproche trop." },
+      { n:25, t:'a', en:"During a conflict, I tend to impulsively do or say things I later regret, rather than be able to reason about things.", fr:"Durant un conflit, j'ai tendance à agir ou parler impulsivement et à le regretter ensuite, plutôt que de raisonner calmement." },
+      { n:26, t:'b', en:"An argument with my partner doesn't usually cause me to question our entire relationship.", fr:"Une dispute avec mon/ma partenaire ne me pousse généralement pas à remettre en question toute notre relation." },
+      { n:27, t:'c', en:"My partners often want me to be more intimate than I feel comfortable being.", fr:"Mes partenaires veulent souvent plus d'intimité que je ne me sens à l'aise d'en offrir." },
+      { n:28, t:'a', en:"I worry that I'm not attractive enough.", fr:"Je m'inquiète de ne pas être suffisamment attirant(e)." },
+      { n:29, t:'b', en:"Sometimes people see me as boring because I create little drama in relationships.", fr:"Parfois les gens me trouvent ennuyeux/ennuyeuse car je crée peu de drames dans mes relations." },
+      { n:30, t:'a', en:"I miss my partner when we're apart, but then when we're together I feel the need to escape.", fr:"Mon/ma partenaire me manque quand nous sommes séparés, mais une fois ensemble, j'ai besoin de m'échapper." },
+      { n:31, t:'b', en:"When I disagree with someone, I feel comfortable expressing my opinions.", fr:"Quand je ne suis pas d'accord avec quelqu'un, je suis à l'aise pour exprimer mon opinion." },
+      { n:32, t:'c', en:"I hate feeling that other people depend on me.", fr:"Je déteste que les autres dépendent de moi." },
+      { n:33, t:'b', en:"If I notice that someone I'm interested in is checking out other people, I don't let it faze me. I might feel a pang of jealousy, but it's fleeting.", fr:"Si je remarque que quelqu'un qui m'intéresse regarde d'autres personnes, cela ne me perturbe pas trop. Je peux ressentir une légère jalousie, mais elle passe vite." },
+      { n:34, t:'c', en:"If I notice that someone I'm interested in is checking out other people, I feel relieved—it means s/he's not looking to make things exclusive.", fr:"Si je remarque que quelqu'un qui m'intéresse regarde d'autres personnes, je me sens soulagé(e) — cela signifie qu'il/elle ne cherche pas à rendre les choses exclusives." },
+      { n:35, t:'a', en:"If I notice that someone I'm interested in is checking out other people, it makes me feel depressed.", fr:"Si je remarque que quelqu'un qui m'intéresse regarde d'autres personnes, cela me rend déprimé(e)." },
+      { n:36, t:'b', en:"If someone I've been dating begins to act cold and distant, I may wonder what's happened, but I'll know it's probably not about me.", fr:"Si quelqu'un avec qui je sors commence à être froid/froide et distant(e), je me demanderai ce qui s'est passé, mais je saurai que ce n'est probablement pas à cause de moi." },
+      { n:37, t:'c', en:"If someone I've been dating begins to act cold and distant, I'll probably be indifferent; I might even be relieved.", fr:"Si quelqu'un avec qui je sors commence à être froid/froide et distant(e), je serai probablement indifférent(e) ; je pourrais même me sentir soulagé(e)." },
+      { n:38, t:'a', en:"If someone I've been dating begins to act cold and distant, I'll worry that I've done something wrong.", fr:"Si quelqu'un avec qui je sors commence à être froid/froide et distant(e), je m'inquiéterai d'avoir fait quelque chose de mal." },
+      { n:39, t:'a', en:"If my partner was to break up with me, I'd try my best to show her/him what s/he is missing (a little jealousy can't hurt).", fr:"Si mon/ma partenaire devait me quitter, j'essaierais de lui montrer ce qu'il/elle perd (un peu de jalousie ne peut pas faire de mal)." },
+      { n:40, t:'b', en:"If someone I've been dating for several months tells me s/he wants to stop seeing me, I'd feel hurt at first, but I'd get over it.", fr:"Si quelqu'un avec qui je sors depuis plusieurs mois me dit qu'il/elle veut arrêter de me voir, je serais blessé(e) au début, mais je m'en remettrais." },
+      { n:41, t:'a', en:"Sometimes when I get what I want in a relationship, I'm not sure what I want anymore.", fr:"Parfois, quand j'obtiens ce que je veux dans une relation, je ne suis plus sûr(e) de ce que je veux." },
+      { n:42, t:'b', en:"I won't have much of a problem staying in touch with my ex (strictly platonic)—after all, we have a lot in common.", fr:"Je n'aurai pas de problème à rester en contact avec mon ex (strictement platonique) — après tout, nous avons beaucoup en commun." },
     ];
 
     const RESULTS = {
       a: {
         cls: 'anxious',
-        name: 'Anxieux',
-        sub: 'Anxious Attachment',
-        title: 'Ce que signifie le style Anxieux',
-        p1: 'Les personnes au style d\'attachement anxieux ont tendance à s\'inquiéter de la réciprocité dans leurs relations. Elles cherchent souvent la validation de leur partenaire et peuvent ressentir une insécurité persistante même dans des relations stables. Cette sensibilité émotionnelle peut se manifester par de la jalousie ou un besoin fort de réassurance — mais elle reflète aussi une grande capacité d\'amour et d\'engagement sincère.',
-        p2: 'Avec une prise de conscience et un travail personnel (ou thérapeutique), les personnes anxieuses peuvent apprendre à réguler leur anxiété relationnelle et construire des liens plus épanouissants et sécurisants.'
+        en: { eyebrow:'Attachment Style', name:'Anxious', sub:'Anxious Attachment', title:'What the Anxious style means', p1:"People with an anxious attachment style tend to worry about reciprocity in their relationships. They often seek validation from their partner and may feel persistent insecurity even in stable relationships. This emotional sensitivity can manifest as jealousy or a strong need for reassurance — but it also reflects a great capacity for love and sincere commitment.", p2:"With self-awareness and personal (or therapeutic) work, anxious individuals can learn to regulate their relational anxiety and build more fulfilling and secure bonds." },
+        fr: { eyebrow:"Style d'attachement", name:'Anxieux', sub:'Anxious Attachment', title:'Ce que signifie le style Anxieux', p1:"Les personnes au style d'attachement anxieux ont tendance à s'inquiéter de la réciprocité dans leurs relations. Elles cherchent souvent la validation de leur partenaire et peuvent ressentir une insécurité persistante même dans des relations stables. Cette sensibilité émotionnelle peut se manifester par de la jalousie ou un besoin fort de réassurance — mais elle reflète aussi une grande capacité d'amour et d'engagement sincère.", p2:"Avec une prise de conscience et un travail personnel (ou thérapeutique), les personnes anxieuses peuvent apprendre à réguler leur anxiété relationnelle et construire des liens plus épanouissants et sécurisants." }
       },
       b: {
         cls: 'secure',
-        name: 'Confiant',
-        sub: 'Secure Attachment',
-        title: 'Ce que signifie le style Confiant',
-        p1: 'Les personnes au style d\'attachement confiant (ou sécure) sont à l\'aise avec l\'intimité et l\'interdépendance. Elles font naturellement confiance à leurs partenaires, expriment leurs besoins clairement et gèrent les conflits de façon constructive. Ce style constitue la base la plus solide pour des relations romantiques épanouissantes.',
-        p2: 'Les personnes sécures savent aimer pleinement sans perdre leur sens d\'elles-mêmes. Elles servent aussi souvent de "régulateur" sain dans leurs relations, offrant stabilité et sécurité à leurs partenaires.'
+        en: { eyebrow:'Attachment Style', name:'Secure', sub:'Secure Attachment', title:'What the Secure style means', p1:"People with a secure attachment style are comfortable with intimacy and interdependence. They naturally trust their partners, express their needs clearly, and handle conflicts constructively. This style — often developed through healthy early relationships — provides the strongest foundation for fulfilling romantic relationships.", p2:"Securely attached people can love fully without losing their sense of self. They often act as a healthy \"regulator\" in their relationships, offering stability and safety to their partners." },
+        fr: { eyebrow:"Style d'attachement", name:'Confiant', sub:'Secure Attachment', title:'Ce que signifie le style Confiant', p1:"Les personnes au style d'attachement confiant (ou sécure) sont à l'aise avec l'intimité et l'interdépendance. Elles font naturellement confiance à leurs partenaires, expriment leurs besoins clairement et gèrent les conflits de façon constructive. Ce style constitue la base la plus solide pour des relations romantiques épanouissantes.", p2:"Les personnes sécures savent aimer pleinement sans perdre leur sens d'elles-mêmes. Elles servent aussi souvent de « régulateur » sain dans leurs relations, offrant stabilité et sécurité à leurs partenaires." }
       },
       c: {
         cls: 'avoidant',
-        name: 'Évitant',
-        sub: 'Avoidant Attachment',
-        title: 'Ce que signifie le style Évitant',
-        p1: 'Les personnes au style d\'attachement évitant valorisent fortement leur indépendance et peuvent trouver difficile de laisser entrer les autres. Elles tendent à minimiser l\'importance émotionnelle des relations et peuvent se sentir étouffées lorsque leur partenaire cherche de la proximité ou de l\'engagement.',
-        p2: 'Ce style est souvent une défense apprise face à des expériences passées où l\'expression des besoins n\'a pas été bien accueillie. Il est tout à fait possible de travailler vers plus d\'ouverture émotionnelle avec de la conscience et un soutien adapté.'
+        en: { eyebrow:'Attachment Style', name:'Avoidant', sub:'Avoidant Attachment', title:'What the Avoidant style means', p1:"People with an avoidant attachment style highly value their independence and may find it difficult to let others in. They tend to minimize the emotional importance of relationships and may feel suffocated when a partner seeks closeness or commitment.", p2:"This style is often a learned defense from past experiences where expressing needs was not well received. It is entirely possible to work toward greater emotional openness with awareness and the right support." },
+        fr: { eyebrow:"Style d'attachement", name:'Évitant', sub:'Avoidant Attachment', title:'Ce que signifie le style Évitant', p1:"Les personnes au style d'attachement évitant valorisent fortement leur indépendance et peuvent trouver difficile de laisser entrer les autres. Elles tendent à minimiser l'importance émotionnelle des relations et peuvent se sentir étouffées lorsque leur partenaire cherche de la proximité ou de l'engagement.", p2:"Ce style est souvent une défense apprise face à des expériences passées où l'expression des besoins n'a pas été bien accueillie. Il est tout à fait possible de travailler vers plus d'ouverture émotionnelle avec de la conscience et un soutien adapté." }
       }
     };
 
+    function setLang(lang) {
+      LANG = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+
+      // Update all data-en / data-fr elements (except innerHTML ones handled separately)
+      document.querySelectorAll('[data-en]').forEach(el => {
+        const val = el.getAttribute('data-' + lang);
+        if (val) el.innerHTML = val;
+      });
+
+      // Update button text
+      document.getElementById('btn-submit').textContent = lang === 'fr' ? 'Voir mon résultat →' : 'See my result →';
+      document.getElementById('btn-retry').textContent  = lang === 'fr' ? '↺ Recommencer' : '↺ Start Over';
+
+      // Re-render table rows text (keep checkboxes state)
+      document.querySelectorAll('#tbody tr').forEach(tr => {
+        const n   = parseInt(tr.id.replace('r',''));
+        const q   = QUESTIONS.find(x => x.n === n);
+        const td  = tr.querySelector('.td-stmt');
+        if (td && q) td.textContent = q[lang];
+      });
+
+      // Re-render result if visible
+      if (document.getElementById('result-wrap').classList.contains('on')) {
+        renderResultText();
+      }
+    }
+
     function buildTable() {
       const tbody = document.getElementById('tbody');
+      tbody.innerHTML = '';
       QUESTIONS.forEach(q => {
         const tr = document.createElement('tr');
         tr.id = `r${q.n}`;
-        const mkCb = type =>
-          q.t === type
-            ? `<div class="cb-wrap cb-${type}"><input type="checkbox" data-t="${type}" onchange="tick(this)"></div>`
-            : '';
+        const mkCb = t =>
+          `<div class="cb-wrap cb-${t}"><input type="checkbox" data-t="${t}" onchange="tick(this)"></div>`;
         tr.innerHTML = `
           <td class="td-num">${q.n}</td>
-          <td class="td-stmt">${q.s}</td>
+          <td class="td-stmt">${q[LANG]}</td>
           <td class="td-cb">${mkCb('a')}</td>
           <td class="td-cb">${mkCb('b')}</td>
           <td class="td-cb">${mkCb('c')}</td>`;
@@ -517,11 +444,13 @@
     }
 
     function tick(cb) {
-      const row = cb.closest('tr');
-      if (cb.checked) {
-        row.className = `row-${cb.dataset.t}`;
+      const tr = cb.closest('tr');
+      const checked = tr.querySelectorAll('input:checked');
+      if (checked.length === 0) {
+        tr.className = '';
       } else {
-        row.className = '';
+        const last = checked[checked.length - 1];
+        tr.className = `row-${last.dataset.t}`;
       }
       recount();
     }
@@ -529,36 +458,41 @@
     function recount() {
       let a=0, b=0, c=0;
       document.querySelectorAll('input[type=checkbox]:checked').forEach(cb => {
-        if (cb.dataset.t==='a') a++;
-        else if (cb.dataset.t==='b') b++;
-        else c++;
+        if (cb.dataset.t==='a') a++; else if (cb.dataset.t==='b') b++; else c++;
       });
       document.getElementById('cnt-a').textContent = a;
       document.getElementById('cnt-b').textContent = b;
       document.getElementById('cnt-c').textContent = c;
     }
 
+    let lastWinner = 'b';
+
+    function renderResultText() {
+      const r = RESULTS[lastWinner][LANG];
+      document.getElementById('rt-eyebrow').textContent = r.eyebrow;
+      document.getElementById('rt-name').textContent    = r.name;
+      document.getElementById('rt-sub').textContent     = r.sub;
+      document.getElementById('desc-title').textContent = r.title;
+      document.getElementById('desc-p1').textContent    = r.p1;
+      document.getElementById('desc-p2').textContent    = r.p2;
+    }
+
     function showResult() {
       let a=0, b=0, c=0;
       document.querySelectorAll('input[type=checkbox]:checked').forEach(cb => {
-        if (cb.dataset.t==='a') a++;
-        else if (cb.dataset.t==='b') b++;
-        else c++;
+        if (cb.dataset.t==='a') a++; else if (cb.dataset.t==='b') b++; else c++;
       });
 
-      let winner = 'b';
-      if (a > b && a > c)       winner = 'a';
-      else if (c > a && c > b)  winner = 'c';
-      else if (b >= a && b >= c) winner = 'b';
+      if (a > b && a > c)        lastWinner = 'a';
+      else if (c > a && c > b)   lastWinner = 'c';
+      else                       lastWinner = 'b';
 
-      const r   = RESULTS[winner];
+      const cls = RESULTS[lastWinner].cls;
       const tot = Math.max(a + b + c, 1);
 
-      document.getElementById('rt-eyebrow').className = `rt-eyebrow ${r.cls}`;
-      document.getElementById('rt-name').className    = `rt-name ${r.cls}`;
-      document.getElementById('rt-name').textContent  = r.name;
-      document.getElementById('rt-sub').textContent   = r.sub;
-      document.getElementById('result-top').className = `result-top ${r.cls}`;
+      document.getElementById('rt-eyebrow').className = `rt-eyebrow ${cls}`;
+      document.getElementById('rt-name').className    = `rt-name ${cls}`;
+      document.getElementById('result-top').className = `result-top ${cls}`;
 
       document.getElementById('num-a').textContent = a;
       document.getElementById('num-b').textContent = b;
@@ -570,13 +504,11 @@
         document.getElementById('bar-c').style.width = `${(c/tot)*100}%`;
       }, 120);
 
-      document.getElementById('desc-title').textContent = r.title;
-      document.getElementById('desc-p1').textContent    = r.p1;
-      document.getElementById('desc-p2').textContent    = r.p2;
+      renderResultText();
 
       const wrap = document.getElementById('result-wrap');
       wrap.classList.add('on');
-      setTimeout(() => wrap.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+      setTimeout(() => wrap.scrollIntoView({ behavior:'smooth', block:'start' }), 80);
     }
 
     function resetTest() {
@@ -584,11 +516,9 @@
         cb.checked = false;
         cb.closest('tr').className = '';
       });
-      document.getElementById('cnt-a').textContent = '0';
-      document.getElementById('cnt-b').textContent = '0';
-      document.getElementById('cnt-c').textContent = '0';
+      ['cnt-a','cnt-b','cnt-c'].forEach(id => document.getElementById(id).textContent = '0');
       document.getElementById('result-wrap').classList.remove('on');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top:0, behavior:'smooth' });
     }
 
     buildTable();
