@@ -817,6 +817,10 @@
           <input class="cf-input" type="email" id="cfEmail" placeholder="john@company.com"/>
         </div>
         <div class="cf-group">
+          <label class="cf-label" data-en="Phone Number" data-fr="Numéro de téléphone">Phone Number</label>
+          <input class="cf-input" type="tel" id="cfPhone" placeholder="+1 (555) 000-0000"/>
+        </div>
+        <div class="cf-group">
           <label class="cf-label" data-en="Project Type" data-fr="Type de projet">Project Type</label>
           <select class="cf-input" id="cfType" style="appearance:none">
             <option data-en="Starter — $400" data-fr="Démarrage — 400$">Starter — $400</option>
@@ -868,12 +872,13 @@
     });
     // Update placeholders
     const placeholders = {
-      en: { name: 'John Doe', email: 'john@company.com', msg: "What do you need? What's your timeline?" },
-      fr: { name: 'Jean Dupont', email: 'jean@entreprise.com', msg: "De quoi avez-vous besoin ? Quel est votre délai ?" }
+      en: { name: 'John Doe', email: 'john@company.com', phone: '+1 (555) 000-0000', msg: "What do you need? What's your timeline?" },
+      fr: { name: 'Jean Dupont', email: 'jean@entreprise.com', phone: '+33 6 00 00 00 00', msg: "De quoi avez-vous besoin ? Quel est votre délai ?" }
     };
     const p = placeholders[lang];
     document.getElementById('cfName').placeholder  = p.name;
     document.getElementById('cfEmail').placeholder = p.email;
+    document.getElementById('cfPhone').placeholder = p.phone;
     document.getElementById('cfMsg').placeholder   = p.msg;
     // Update select options
     document.querySelectorAll('select option[data-' + lang + ']').forEach(opt => {
@@ -891,6 +896,7 @@
   async function submitContact() {
     const name  = document.getElementById('cfName').value.trim();
     const email = document.getElementById('cfEmail').value.trim();
+    const phone = document.getElementById('cfPhone').value.trim();
     const type  = document.getElementById('cfType').value.trim();
     const msg   = document.getElementById('cfMsg').value.trim();
     if (!name || !email || !msg) {
@@ -909,6 +915,7 @@
         body: JSON.stringify({
           name,
           email,
+          phone: phone || 'Non fourni',
           subject: `[Portfolio] Nouvelle demande : ${type}`,
           message: msg
         })
