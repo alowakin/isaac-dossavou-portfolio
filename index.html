@@ -11,14 +11,14 @@
       --bg:      #f5f5f4;
       --bg2:     #fafaf9;
       --bg3:     #eeeeec;
-      --line:    rgba(0,0,0,.1);
+      --line:    rgba(0,0,0,.09);
       --accent:  #4f8ef7;
       --accent2: #7eb3ff;
       --data:    #7c6ef0;
       --data2:   #a89cf5;
       --white:   #111111;
       --gray:    #737373;
-      --gray2:   #d4d4d4;
+      --gray2:   #c8c8c6;
     }
 
     /* ── RESET ── */
@@ -31,10 +31,9 @@
       overflow-x: hidden;
     }
 
-    /* ── NOISE OVERLAY ── */
+    /* ── NOISE ── */
     body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
       opacity: .012;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       background-size: 200px;
@@ -44,31 +43,36 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1.4rem 3rem;
+      padding: 1.2rem 3rem;
       background: rgba(245,245,244,.97);
       backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--line);
     }
     .nav-logo {
       font-family: 'Fraunces', serif;
-      font-size: 1.1rem; font-weight: 800;
-      letter-spacing: -.02em; color: var(--white);
-      text-decoration: none;
+      font-size: 1rem; font-weight: 800;
+      letter-spacing: -.02em; color: var(--white); text-decoration: none;
     }
     .nav-logo em { color: var(--accent); font-style: normal; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
     .nav-links a {
-      font-size: .78rem; font-weight: 500; letter-spacing: .08em;
-      text-transform: uppercase; color: var(--gray);
-      text-decoration: none; transition: color .2s;
+      font-size: .75rem; font-weight: 500; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color .2s;
     }
     .nav-links a:hover { color: var(--white); }
     .nav-cta {
       background: var(--accent); color: var(--bg) !important;
-      padding: .45rem 1.2rem; font-weight: 700 !important;
-      transition: opacity .2s !important;
+      padding: .4rem 1.1rem; font-weight: 700 !important; transition: opacity .2s !important;
     }
     .nav-cta:hover { opacity: .85; }
+    .lang-toggle { display: flex; align-items: center; gap: .5rem; }
+    .lang-btn {
+      background: none; border: 1px solid var(--gray2); color: var(--gray);
+      padding: .22rem .55rem; font-family: 'Instrument Sans', sans-serif;
+      font-size: .65rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; cursor: pointer; transition: all .2s;
+    }
+    .lang-btn.active { background: var(--accent); border-color: var(--accent); color: var(--bg); }
 
     /* ── HAMBURGER ── */
     .hamburger {
@@ -79,8 +83,7 @@
     .hamburger span {
       display: block; width: 22px; height: 2px;
       background: var(--white); border-radius: 2px;
-      transition: transform .3s, opacity .3s, width .3s;
-      transform-origin: center;
+      transition: transform .3s, opacity .3s, width .3s; transform-origin: center;
     }
     .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.active span:nth-child(2) { opacity: 0; width: 0; }
@@ -88,27 +91,18 @@
 
     /* ── MOBILE MENU ── */
     .mobile-menu {
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 150;
-      background: rgba(245,245,244,.98);
-      backdrop-filter: blur(20px);
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 150;
+      background: rgba(245,245,244,.98); backdrop-filter: blur(20px);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 0;
-      opacity: 0; pointer-events: none;
-      transition: opacity .3s ease;
+      opacity: 0; pointer-events: none; transition: opacity .3s ease;
     }
     .mobile-menu.open { opacity: 1; pointer-events: all; }
-    .mobile-menu ul {
-      list-style: none; display: flex; flex-direction: column;
-      align-items: center; gap: .25rem; width: 100%; padding: 0 2rem;
-    }
+    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; align-items: center; gap: .2rem; width: 100%; padding: 0 2rem; }
     .mobile-menu ul li { width: 100%; text-align: center; }
     .mobile-menu ul a {
-      display: block; padding: 1rem 1rem;
-      font-size: 1.2rem; font-family: 'Fraunces', serif;
-      font-weight: 700; letter-spacing: -.02em;
-      color: var(--white); text-decoration: none;
-      border-bottom: 1px solid var(--line);
+      display: block; padding: 1rem;
+      font-size: 1.15rem; font-family: 'Fraunces', serif; font-weight: 700;
+      color: var(--white); text-decoration: none; border-bottom: 1px solid var(--line);
       opacity: 0; transform: translateY(16px);
       transition: color .2s, opacity .3s, transform .3s;
     }
@@ -120,18 +114,16 @@
     .mobile-menu ul li:nth-child(5) a { transition-delay: .25s; }
     .mobile-menu ul a:hover { color: var(--accent); }
     .mobile-menu .mob-cta {
-      margin-top: 1.5rem;
-      display: inline-block; padding: .9rem 2.5rem;
+      margin-top: 1.5rem; display: inline-block; padding: .9rem 2.5rem;
       background: var(--accent); color: var(--bg) !important;
-      font-size: .85rem !important; font-weight: 700;
+      font-size: .82rem !important; font-weight: 700;
       font-family: 'Instrument Sans', sans-serif !important;
-      letter-spacing: .08em; text-transform: uppercase;
-      text-decoration: none; border-bottom: none !important;
+      letter-spacing: .08em; text-transform: uppercase; text-decoration: none;
       opacity: 0; transform: translateY(16px);
       transition: opacity .3s .3s, transform .3s .3s, background .2s !important;
     }
     .mobile-menu.open .mob-cta { opacity: 1; transform: translateY(0); }
-    .mobile-menu .mob-cta:hover { background: #3778e5 !important; color: #fff !important; }
+    .mobile-menu .mob-cta:hover { background: #3778e5 !important; }
     .mob-lang {
       display: flex; gap: .6rem; margin-top: 2rem;
       opacity: 0; transform: translateY(10px);
@@ -139,247 +131,209 @@
     }
     .mobile-menu.open .mob-lang { opacity: 1; transform: translateY(0); }
     .mob-lang button {
-      background: none; border: 1px solid var(--gray2);
-      color: var(--gray); padding: .3rem .8rem;
-      font-family: 'Instrument Sans', sans-serif;
+      background: none; border: 1px solid var(--gray2); color: var(--gray);
+      padding: .3rem .8rem; font-family: 'Instrument Sans', sans-serif;
       font-size: .72rem; font-weight: 600; letter-spacing: .1em;
       text-transform: uppercase; cursor: pointer; transition: all .2s;
     }
     .mob-lang button.active { background: var(--accent); border-color: var(--accent); color: var(--bg); }
 
-    /* ── LANG TOGGLE ── */
-    .lang-toggle {
-      display: flex; align-items: center; gap: .5rem;
-      font-size: .72rem; font-weight: 600; letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-    .lang-btn {
-      background: none; border: 1px solid var(--gray2);
-      color: var(--gray); padding: .25rem .6rem;
-      font-family: 'Instrument Sans', sans-serif; font-size: .68rem;
-      font-weight: 600; letter-spacing: .1em;
-      text-transform: uppercase; cursor: pointer; transition: all .2s;
-    }
-    .lang-btn.active { background: var(--accent); border-color: var(--accent); color: var(--bg); }
-
     /* ── HERO ── */
     .hero {
       min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 9rem 3rem 6rem;
-      text-align: center;
-      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 9rem 3rem 6rem; text-align: center; position: relative; overflow: hidden;
     }
     .hero::before {
-      content: '';
-      position: absolute; inset: 0;
+      content: ''; position: absolute; inset: 0; pointer-events: none;
       background:
-        radial-gradient(ellipse 70% 60% at 15% 50%, rgba(124,110,240,.07) 0%, transparent 100%),
-        radial-gradient(ellipse 70% 60% at 85% 50%, rgba(79,142,247,.07) 0%, transparent 100%);
-      pointer-events: none;
+        radial-gradient(ellipse 70% 60% at 10% 50%, rgba(124,110,240,.06) 0%, transparent 100%),
+        radial-gradient(ellipse 70% 60% at 90% 50%, rgba(79,142,247,.06) 0%, transparent 100%);
     }
-    .hero-inner {
-      position: relative; z-index: 2;
-      display: flex; flex-direction: column; align-items: center;
-      max-width: 760px; width: 100%;
+    .hero-inner { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 780px; }
+
+    /* Status chip */
+    .hero-status {
+      display: inline-flex; align-items: center; gap: .65rem;
+      font-size: .65rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--gray);
+      border: 1px solid var(--line); padding: .38rem 1rem;
+      margin-bottom: 3.5rem;
+      animation: fadeUp .5s ease both;
+    }
+    .status-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34,197,94,.2); flex-shrink: 0;
+      animation: pulse-g 2s infinite;
+    }
+    @keyframes pulse-g {
+      0%,100% { box-shadow: 0 0 0 3px rgba(34,197,94,.2); }
+      50%      { box-shadow: 0 0 0 6px rgba(34,197,94,.06); }
     }
 
-    /* Photo circle */
+    /* Photo */
     .hero-photo {
-      width: 160px; height: 160px; border-radius: 50%;
+      width: 156px; height: 156px; border-radius: 50%;
       background: linear-gradient(135deg, var(--data), var(--accent));
       display: flex; align-items: center; justify-content: center;
-      margin-bottom: 2.2rem;
-      box-shadow: 0 0 0 8px rgba(124,110,240,.1), 0 0 0 16px rgba(79,142,247,.06);
-      animation: fadeUp .6s ease both;
-      flex-shrink: 0;
-      overflow: hidden;
+      margin-bottom: .9rem;
+      box-shadow: 0 0 0 8px rgba(124,110,240,.09), 0 0 0 16px rgba(79,142,247,.05);
+      animation: fadeUp .6s .05s ease both; overflow: hidden; flex-shrink: 0;
     }
-    .hero-photo img {
-      width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
-    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
     .hero-photo .initials {
-      font-family: 'Fraunces', serif;
-      font-size: 2.6rem; font-weight: 800; color: #fff;
-      letter-spacing: -.03em; user-select: none;
+      font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 800;
+      color: #fff; letter-spacing: -.03em; user-select: none;
+    }
+    .hero-fig {
+      font-size: .57rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gray2); margin-bottom: 2rem;
+      animation: fadeUp .6s .1s ease both;
     }
 
+    /* Name */
     .hero-name {
       font-family: 'Fraunces', serif;
-      font-size: clamp(2.6rem, 5.5vw, 4.8rem);
-      font-weight: 800; letter-spacing: -.04em; line-height: 1;
-      margin-bottom: 1.6rem;
-      animation: fadeUp .7s .1s ease both;
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      font-weight: 800; letter-spacing: -.04em; line-height: .95;
+      margin-bottom: 1.5rem;
+      animation: fadeUp .7s .12s ease both;
     }
 
+    /* Role badges */
     .hero-roles {
-      display: flex; gap: .75rem; flex-wrap: wrap;
-      justify-content: center; margin-bottom: 1.8rem;
-      animation: fadeUp .8s .2s ease both;
+      display: flex; gap: .7rem; flex-wrap: wrap; justify-content: center;
+      margin-bottom: 2rem;
+      animation: fadeUp .75s .18s ease both;
     }
     .role-badge {
-      display: inline-flex; align-items: center; gap: .5rem;
-      padding: .42rem 1.1rem;
-      font-size: .7rem; font-weight: 600; letter-spacing: .12em;
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .38rem 1rem;
+      font-size: .68rem; font-weight: 600; letter-spacing: .12em;
       text-transform: uppercase; border: 1px solid;
     }
-    .data-badge {
-      background: rgba(124,110,240,.08);
-      border-color: rgba(124,110,240,.25); color: var(--data);
-    }
-    .dev-badge {
-      background: rgba(79,142,247,.08);
-      border-color: rgba(79,142,247,.25); color: var(--accent);
+    .data-badge { background: rgba(124,110,240,.07); border-color: rgba(124,110,240,.24); color: var(--data); }
+    .dev-badge  { background: rgba(79,142,247,.07);  border-color: rgba(79,142,247,.24);  color: var(--accent); }
+
+    /* Positioning statement */
+    .hero-statement {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1rem, 2.4vw, 1.38rem);
+      font-weight: 300; font-style: italic;
+      color: rgba(0,0,0,.55); max-width: 580px; line-height: 1.7;
+      margin-bottom: 2.8rem;
+      animation: fadeUp .8s .22s ease both;
     }
 
-    .hero-desc {
-      font-size: .97rem; font-weight: 300; line-height: 1.85;
-      color: rgba(0,0,0,.55); max-width: 520px;
-      margin-bottom: 2.5rem;
-      animation: fadeUp .9s .3s ease both;
+    /* Metadata block (inspired by bolablg.com) */
+    .hero-meta {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--line); width: 100%; max-width: 640px;
+      margin-bottom: 2.8rem;
+      animation: fadeUp .88s .28s ease both;
     }
+    .hero-meta-item {
+      padding: 1.2rem 1.4rem; border-right: 1px solid var(--line); text-align: left;
+    }
+    .hero-meta-item:last-child { border-right: none; }
+    .meta-label {
+      font-size: .55rem; font-weight: 700; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--gray2); display: block; margin-bottom: .45rem;
+    }
+    .meta-val {
+      font-family: 'Fraunces', serif;
+      font-size: .82rem; font-weight: 700; color: var(--white); line-height: 1.45;
+    }
+    .meta-val.open { color: #22c55e; }
 
+    /* CTA buttons */
     .hero-actions {
-      display: flex; gap: .9rem; justify-content: center;
-      flex-wrap: wrap; margin-bottom: 4rem;
-      animation: fadeUp 1s .4s ease both;
+      display: flex; gap: .9rem; justify-content: center; flex-wrap: wrap;
+      animation: fadeUp .95s .33s ease both;
     }
     .btn-data {
-      background: var(--data); color: #fff;
-      border: none; padding: .85rem 2rem;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: .82rem; font-weight: 700;
-      letter-spacing: .06em; text-transform: uppercase;
-      cursor: pointer; text-decoration: none;
-      display: inline-flex; align-items: center; gap: .5rem;
-      transition: transform .2s, opacity .2s;
+      background: var(--data); color: #fff; border: none; padding: .85rem 2rem;
+      font-family: 'Instrument Sans', sans-serif; font-size: .8rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: .5rem; transition: transform .2s, opacity .2s;
     }
     .btn-data:hover { transform: translateY(-2px); opacity: .9; }
     .btn-dev {
-      background: var(--accent); color: var(--bg);
-      border: none; padding: .85rem 2rem;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: .82rem; font-weight: 700;
-      letter-spacing: .06em; text-transform: uppercase;
-      cursor: pointer; text-decoration: none;
-      display: inline-flex; align-items: center; gap: .5rem;
-      transition: transform .2s, opacity .2s;
+      background: var(--accent); color: var(--bg); border: none; padding: .85rem 2rem;
+      font-family: 'Instrument Sans', sans-serif; font-size: .8rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: .5rem; transition: transform .2s, opacity .2s;
     }
     .btn-dev:hover { transform: translateY(-2px); opacity: .9; }
-
-    /* Hero stats */
-    .hero-stats {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 1px; background: var(--line);
-      border: 1px solid var(--line);
-      width: 100%; max-width: 600px;
-      animation: fadeUp 1s .5s ease both;
-    }
-    .hero-stat {
-      background: var(--bg2); padding: 1.5rem 1rem;
-      text-align: center; transition: background .25s;
-    }
-    .hero-stat:hover { background: var(--bg3); }
-    .hero-stat .num {
-      font-family: 'Fraunces', serif;
-      font-size: 1.7rem; font-weight: 800; line-height: 1;
-    }
-    .hero-stat .num.data-num { color: var(--data); }
-    .hero-stat .num.dev-num  { color: var(--accent); }
-    .hero-stat .label {
-      font-size: .62rem; font-weight: 400; color: var(--gray);
-      margin-top: .35rem; letter-spacing: .04em;
-    }
-
-    /* ── PROFILES ── */
-    .profiles { background: var(--bg2); border-top: 1px solid var(--line); }
-    .profiles-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1.5rem; margin-top: 3.5rem;
-    }
-    .profile-card {
-      background: var(--bg); border: 1px solid var(--line);
-      padding: 3rem 2.5rem;
-      cursor: pointer; text-decoration: none; color: inherit;
-      display: block;
-      transition: border-color .25s, transform .3s, box-shadow .3s;
-      position: relative; overflow: hidden;
-    }
-    .profile-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 4px;
-    }
-    .profile-card.data-card::before { background: linear-gradient(90deg, var(--data), var(--data2)); }
-    .profile-card.dev-card::before  { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
-    .profile-card:hover { transform: translateY(-6px); box-shadow: 0 28px 52px rgba(0,0,0,.09); }
-    .profile-card.data-card:hover { border-color: rgba(124,110,240,.35); }
-    .profile-card.dev-card:hover  { border-color: rgba(79,142,247,.35); }
-
-    .profile-icon { font-size: 2.6rem; line-height: 1; display: block; margin-bottom: 1.2rem; }
-    .profile-label {
-      font-size: .63rem; font-weight: 700; letter-spacing: .2em;
-      text-transform: uppercase; margin-bottom: .6rem;
-    }
-    .profile-label.data-label { color: var(--data); }
-    .profile-label.dev-label  { color: var(--accent); }
-    .profile-title {
-      font-family: 'Fraunces', serif;
-      font-size: 1.5rem; font-weight: 800; letter-spacing: -.02em;
-      margin-bottom: 1rem; color: var(--white); line-height: 1.2;
-    }
-    .profile-desc {
-      font-size: .88rem; font-weight: 300;
-      color: rgba(0,0,0,.6); line-height: 1.8; margin-bottom: 1.6rem;
-    }
-    .profile-skills { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 2rem; }
-    .skill-chip {
-      font-size: .64rem; font-weight: 600; letter-spacing: .08em;
-      text-transform: uppercase; padding: .25rem .65rem; border: 1px solid;
-    }
-    .skill-chip.data-chip {
-      background: rgba(124,110,240,.06);
-      border-color: rgba(124,110,240,.22); color: var(--data);
-    }
-    .skill-chip.dev-chip {
-      background: rgba(79,142,247,.06);
-      border-color: rgba(79,142,247,.22); color: var(--accent);
-    }
-    .profile-cta {
-      font-size: .78rem; font-weight: 700; letter-spacing: .06em;
-      text-transform: uppercase;
-      display: inline-flex; align-items: center; gap: .4rem;
-      transition: gap .25s;
-    }
-    .data-card .profile-cta { color: var(--data); }
-    .dev-card  .profile-cta { color: var(--accent); }
-    .profile-card:hover .profile-cta { gap: .7rem; }
 
     /* ── SECTION BASE ── */
     .section { padding: 7rem 3rem; position: relative; }
     .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    /* Section tags — bolablg.com style [01] LABEL */
     .section-tag {
-      font-size: .65rem; font-weight: 600; letter-spacing: .22em;
-      text-transform: uppercase; color: var(--accent);
-      display: flex; align-items: center; gap: .6rem;
-      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: .7rem;
+      font-size: .6rem; font-weight: 700; letter-spacing: .24em;
+      text-transform: uppercase; margin-bottom: 1.1rem;
     }
-    .section-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+    .st-num { color: var(--gray2); }
+    .st-label { color: var(--accent); }
+
     .section-heading {
       font-family: 'Fraunces', serif;
       font-size: clamp(2rem, 4vw, 3.2rem);
       font-weight: 800; letter-spacing: -.03em; line-height: 1.1;
     }
-    .section-heading .span { color: var(--accent); }
+    .section-heading .hl { color: var(--accent); }
+    .section-rule {
+      width: 100%; height: 1px; background: var(--line); margin: 2.5rem 0;
+    }
+
+    /* ── PROFILES ── */
+    .profiles { background: var(--bg2); border-top: 1px solid var(--line); }
+    .profiles-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3.5rem;
+    }
+    .profile-card {
+      background: var(--bg); border: 1px solid var(--line);
+      padding: 3rem 2.5rem; cursor: pointer;
+      text-decoration: none; color: inherit; display: block;
+      transition: border-color .25s, transform .3s, box-shadow .3s;
+      position: relative; overflow: hidden;
+    }
+    .profile-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .profile-card.data-card::before { background: linear-gradient(90deg, var(--data), var(--data2)); }
+    .profile-card.dev-card::before  { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+    .profile-card:hover { transform: translateY(-5px); box-shadow: 0 24px 48px rgba(0,0,0,.08); }
+    .profile-card.data-card:hover { border-color: rgba(124,110,240,.3); }
+    .profile-card.dev-card:hover  { border-color: rgba(79,142,247,.3); }
+    .profile-icon { font-size: 2.4rem; line-height: 1; display: block; margin-bottom: 1.2rem; }
+    .profile-label { font-size: .6rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; margin-bottom: .6rem; }
+    .profile-label.data-label { color: var(--data); }
+    .profile-label.dev-label  { color: var(--accent); }
+    .profile-title {
+      font-family: 'Fraunces', serif; font-size: 1.45rem; font-weight: 800;
+      letter-spacing: -.02em; margin-bottom: 1rem; color: var(--white); line-height: 1.2;
+    }
+    .profile-desc { font-size: .88rem; font-weight: 300; color: rgba(0,0,0,.58); line-height: 1.8; margin-bottom: 1.6rem; }
+    .profile-skills { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 2rem; }
+    .skill-chip { font-size: .62rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: .24rem .6rem; border: 1px solid; }
+    .skill-chip.data-chip { background: rgba(124,110,240,.05); border-color: rgba(124,110,240,.2); color: var(--data); }
+    .skill-chip.dev-chip  { background: rgba(79,142,247,.05);  border-color: rgba(79,142,247,.2);  color: var(--accent); }
+    .profile-cta { font-size: .76rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; display: inline-flex; align-items: center; gap: .4rem; transition: gap .25s; }
+    .data-card .profile-cta { color: var(--data); }
+    .dev-card  .profile-cta { color: var(--accent); }
+    .profile-card:hover .profile-cta { gap: .7rem; }
 
     /* ── PROJECTS ── */
     .projects { background: var(--bg); border-top: 1px solid var(--line); }
     .filter-tabs { display: flex; gap: .5rem; margin-top: 2.5rem; flex-wrap: wrap; }
     .filter-btn {
-      background: var(--bg2); border: 1px solid var(--gray2);
-      color: var(--gray); padding: .5rem 1.5rem;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: .73rem; font-weight: 600; letter-spacing: .1em;
+      background: var(--bg2); border: 1px solid var(--gray2); color: var(--gray);
+      padding: .45rem 1.4rem; font-family: 'Instrument Sans', sans-serif;
+      font-size: .7rem; font-weight: 600; letter-spacing: .1em;
       text-transform: uppercase; cursor: pointer; transition: all .2s;
     }
     .filter-btn:hover { border-color: var(--white); color: var(--white); }
@@ -389,128 +343,93 @@
 
     .projects-grid { display: flex; flex-direction: column; gap: 1.5px; margin-top: 2.5rem; }
     .project-row {
-      display: grid; grid-template-columns: 72px 1fr auto;
-      align-items: center; gap: 2rem;
-      padding: 2rem 2.5rem;
+      display: grid; grid-template-columns: 80px 1fr auto;
+      align-items: center; gap: 2rem; padding: 1.8rem 2.5rem;
       background: var(--bg2); border: 1px solid var(--line);
-      transition: background .25s, border-color .25s;
-      text-decoration: none; color: inherit;
-      position: relative; overflow: hidden;
+      transition: background .22s, border-color .22s;
+      text-decoration: none; color: inherit; position: relative; overflow: hidden;
     }
     .project-row::after {
-      content: '';
-      position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
       transform: scaleY(0); transform-origin: bottom; transition: transform .3s;
     }
     .project-row[data-category="data"]::after { background: var(--data); }
     .project-row[data-category="dev"]::after  { background: var(--accent); }
-    .project-row.cta-row::after { background: var(--gray2); }
-
+    .project-row.cta-row::after { background: var(--accent); }
     .project-row:hover { background: var(--bg3); }
     .project-row:hover::after { transform: scaleY(1); }
     .project-row[data-category="data"]:hover { border-color: rgba(124,110,240,.18); }
     .project-row[data-category="dev"]:hover  { border-color: rgba(79,142,247,.18); }
+    .project-row.cta-row:hover { border-color: rgba(79,142,247,.18); }
 
-    .project-num {
-      display: flex; flex-direction: column; gap: .3rem;
-      align-items: flex-start;
+    .project-num { display: flex; flex-direction: column; gap: .3rem; }
+    .num-tag { font-family: 'Fraunces', serif; font-size: .72rem; font-weight: 700; letter-spacing: .08em; color: var(--gray); }
+    .cat-tag {
+      font-size: .52rem; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase; padding: .14rem .4rem; border: 1px solid;
     }
-    .project-num .num-tag {
-      font-family: 'Fraunces', serif;
-      font-size: .72rem; font-weight: 700; letter-spacing: .1em;
-      color: var(--gray);
-    }
-    .project-num .cat-tag {
-      font-size: .55rem; font-weight: 700; letter-spacing: .16em;
-      text-transform: uppercase; padding: .15rem .45rem; border: 1px solid;
-    }
-    .project-num .cat-tag.data { background: rgba(124,110,240,.08); border-color: rgba(124,110,240,.25); color: var(--data); }
-    .project-num .cat-tag.dev  { background: rgba(79,142,247,.08);  border-color: rgba(79,142,247,.25);  color: var(--accent); }
+    .cat-tag.data { background: rgba(124,110,240,.07); border-color: rgba(124,110,240,.22); color: var(--data); }
+    .cat-tag.dev  { background: rgba(79,142,247,.07);  border-color: rgba(79,142,247,.22);  color: var(--accent); }
+    .proj-year { font-size: .57rem; font-weight: 600; letter-spacing: .1em; color: var(--gray2); }
 
-    .project-info {}
     .project-title {
-      font-family: 'Fraunces', serif;
-      font-size: 1.15rem; font-weight: 700;
-      color: var(--white); margin-bottom: .35rem; transition: color .2s;
+      font-family: 'Fraunces', serif; font-size: 1.12rem; font-weight: 700;
+      color: var(--white); margin-bottom: .32rem; transition: color .2s;
     }
     .project-row[data-category="data"]:hover .project-title { color: var(--data); }
     .project-row[data-category="dev"]:hover  .project-title { color: var(--accent); }
     .project-row.cta-row:hover .project-title { color: var(--accent); }
-
-    .project-desc {
-      font-size: .82rem; font-weight: 300;
-      color: var(--gray); line-height: 1.6; max-width: 560px;
-    }
-    .project-tags { display: flex; gap: .4rem; margin-top: .6rem; flex-wrap: wrap; }
+    .project-desc { font-size: .8rem; font-weight: 300; color: var(--gray); line-height: 1.6; max-width: 560px; }
+    .project-tags { display: flex; gap: .35rem; margin-top: .55rem; flex-wrap: wrap; }
     .project-tag {
-      font-size: .62rem; font-weight: 600; letter-spacing: .1em;
-      text-transform: uppercase;
-      background: var(--bg); border: 1px solid var(--gray2);
-      color: var(--gray); padding: .18rem .55rem;
+      font-size: .58rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      background: var(--bg); border: 1px solid var(--gray2); color: var(--gray); padding: .16rem .5rem;
     }
     .project-arrow {
-      width: 40px; height: 40px; border: 1px solid var(--gray2);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: background .2s, border-color .2s;
+      width: 38px; height: 38px; border: 1px solid var(--gray2);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      transition: background .2s, border-color .2s;
     }
     .project-row[data-category="data"]:hover .project-arrow { background: var(--data);   border-color: var(--data); }
     .project-row[data-category="dev"]:hover  .project-arrow { background: var(--accent); border-color: var(--accent); }
     .project-row.cta-row:hover .project-arrow { background: var(--accent); border-color: var(--accent); }
-    .project-arrow svg { width: 16px; height: 16px; fill: var(--gray); transition: fill .2s; }
-    .project-row:hover .project-arrow svg { fill: white; }
+    .project-arrow svg { width: 15px; height: 15px; fill: var(--gray); transition: fill .2s; }
+    .project-row:hover .project-arrow svg { fill: #fff; }
     .project-row.cta-row:hover .project-arrow svg { fill: var(--bg); }
-
     .project-row.hidden { display: none; }
 
     /* ── ABOUT ── */
     .about { background: var(--bg2); border-top: 1px solid var(--line); }
     .about-inner {
       max-width: 1100px; margin: 0 auto;
-      display: grid; grid-template-columns: 1.1fr 1fr;
-      gap: 6rem; align-items: center;
+      display: grid; grid-template-columns: 1.1fr 1fr; gap: 6rem; align-items: center;
     }
-    .about-text p {
-      font-size: .95rem; font-weight: 300; line-height: 1.9;
-      color: rgba(0,0,0,.62); margin-bottom: 1.1rem;
-    }
+    .about-text p { font-size: .93rem; font-weight: 300; line-height: 1.9; color: rgba(0,0,0,.6); margin-bottom: 1.1rem; }
     .about-text p strong { color: var(--white); font-weight: 500; }
     .about-highlight {
-      margin-top: 2rem;
-      border-left: 2px solid var(--accent);
-      padding: .9rem 1.3rem;
-      background: rgba(79,142,247,.04);
-      font-size: .88rem; font-weight: 300;
-      color: rgba(0,0,0,.58); line-height: 1.8; font-style: italic;
+      margin-top: 2rem; border-left: 2px solid var(--accent); padding: .9rem 1.3rem;
+      background: rgba(79,142,247,.04); font-size: .88rem; font-weight: 300;
+      color: rgba(0,0,0,.55); line-height: 1.8; font-style: italic;
     }
     .about-cards { display: flex; flex-direction: column; gap: 1rem; }
     .about-card {
-      background: var(--bg3); border: 1px solid var(--line);
-      padding: 1.4rem 1.6rem;
-      display: flex; align-items: flex-start; gap: 1.1rem;
-      transition: border-color .25s, transform .25s;
+      background: var(--bg3); border: 1px solid var(--line); padding: 1.4rem 1.6rem;
+      display: flex; align-items: flex-start; gap: 1.1rem; transition: border-color .25s, transform .25s;
     }
     .about-card:hover { border-color: rgba(79,142,247,.25); transform: translateX(4px); }
     .about-card-icon {
       width: 36px; height: 36px; flex-shrink: 0;
-      background: rgba(79,142,247,.1);
-      display: flex; align-items: center; justify-content: center;
+      background: rgba(79,142,247,.1); display: flex; align-items: center; justify-content: center;
     }
     .about-card-icon svg { width: 18px; height: 18px; fill: var(--accent); }
-    .about-card-title {
-      font-family: 'Fraunces', serif;
-      font-size: .88rem; font-weight: 700;
-      color: var(--white); margin-bottom: .25rem;
-    }
-    .about-card-desc {
-      font-size: .78rem; font-weight: 300; color: var(--gray); line-height: 1.6;
-    }
+    .about-card-title { font-family: 'Fraunces', serif; font-size: .88rem; font-weight: 700; color: var(--white); margin-bottom: .25rem; }
+    .about-card-desc { font-size: .78rem; font-weight: 300; color: var(--gray); line-height: 1.6; }
 
     /* ── SERVICES ── */
     .services { background: var(--bg); border-top: 1px solid var(--line); }
     .services-grid {
       display: grid; grid-template-columns: repeat(3,1fr);
-      gap: 1px; background: var(--line);
-      border: 1px solid var(--line); margin-top: 3.5rem;
+      gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 3.5rem;
     }
     .service-card {
       background: var(--bg2); padding: 2.5rem 2rem;
@@ -518,67 +437,36 @@
     }
     .service-card:hover { background: var(--bg3); }
     .service-card::before {
-      content: attr(data-num);
-      position: absolute; top: 1rem; right: 1.5rem;
-      font-family: 'Fraunces', serif;
-      font-size: 4rem; font-weight: 800; color: rgba(255,255,255,.04);
+      content: attr(data-num); position: absolute; top: 1rem; right: 1.5rem;
+      font-family: 'Fraunces', serif; font-size: 4rem; font-weight: 800; color: rgba(0,0,0,.03);
     }
-    .service-price {
-      font-family: 'Fraunces', serif;
-      font-size: 1.8rem; font-weight: 800;
-      color: var(--accent); margin-bottom: .5rem;
-    }
-    .service-name {
-      font-family: 'Fraunces', serif;
-      font-size: 1.1rem; font-weight: 700;
-      color: var(--white); margin-bottom: .8rem;
-    }
-    .service-desc {
-      font-size: .82rem; font-weight: 300; color: var(--gray);
-      line-height: 1.7; margin-bottom: 1.5rem;
-    }
+    .service-price { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 800; color: var(--accent); margin-bottom: .5rem; }
+    .service-name { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: .8rem; }
+    .service-desc { font-size: .82rem; font-weight: 300; color: var(--gray); line-height: 1.7; margin-bottom: 1.5rem; }
     .service-features { list-style: none; display: flex; flex-direction: column; gap: .4rem; }
-    .service-features li {
-      font-size: .78rem; font-weight: 300; color: var(--gray);
-      display: flex; align-items: center; gap: .5rem;
-    }
-    .service-features li::before {
-      content: ''; width: 4px; height: 4px;
-      background: var(--accent); border-radius: 50%; flex-shrink: 0;
-    }
+    .service-features li { font-size: .78rem; font-weight: 300; color: var(--gray); display: flex; align-items: center; gap: .5rem; }
+    .service-features li::before { content: '★'; font-size: .55rem; color: var(--accent); }
     .service-card.featured { background: var(--bg3); }
     .service-card.featured .service-name { color: var(--accent); }
     .featured-badge {
-      display: inline-block; font-size: .6rem; font-weight: 700;
-      letter-spacing: .14em; text-transform: uppercase;
-      background: var(--accent); color: var(--bg);
-      padding: .18rem .55rem; margin-bottom: .8rem;
+      display: inline-block; font-size: .58rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; background: var(--accent); color: var(--bg);
+      padding: .16rem .5rem; margin-bottom: .8rem;
     }
 
     /* ── CONTACT ── */
     .contact { background: var(--bg2); border-top: 1px solid var(--line); }
-    .contact-inner {
-      max-width: 1100px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 6rem; align-items: start;
-    }
+    .contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
     .contact-left h2 {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      font-weight: 800; letter-spacing: -.03em;
-      line-height: 1.1; margin-bottom: 1.5rem;
+      font-family: 'Fraunces', serif; font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 800; letter-spacing: -.03em; line-height: 1.1; margin-bottom: 1.5rem;
     }
     .contact-left h2 span { color: var(--accent); }
-    .contact-left p {
-      font-size: .92rem; font-weight: 300;
-      color: rgba(0,0,0,.55); line-height: 1.8; margin-bottom: 2rem;
-    }
+    .contact-left p { font-size: .92rem; font-weight: 300; color: rgba(0,0,0,.55); line-height: 1.8; margin-bottom: 2rem; }
     .contact-links { display: flex; flex-direction: column; gap: .8rem; }
     .contact-link {
-      display: flex; align-items: center; gap: 1rem;
-      text-decoration: none; color: var(--white);
-      padding: 1rem 1.2rem;
-      background: var(--bg); border: 1px solid var(--line);
+      display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--white);
+      padding: 1rem 1.2rem; background: var(--bg); border: 1px solid var(--line);
       transition: border-color .22s, transform .22s;
     }
     .contact-link:hover { border-color: rgba(79,142,247,.3); transform: translateX(4px); }
@@ -587,54 +475,41 @@
     .contact-link small { font-size: .7rem; color: var(--gray); display: block; }
     .contact-form { display: flex; flex-direction: column; gap: .9rem; }
     .cf-group { display: flex; flex-direction: column; gap: .4rem; }
-    .cf-label {
-      font-size: .63rem; font-weight: 600; letter-spacing: .18em;
-      text-transform: uppercase; color: var(--gray);
-    }
+    .cf-label { font-size: .6rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gray); }
     .cf-input, .cf-textarea {
-      background: var(--bg3); border: 1.5px solid var(--gray2);
-      color: var(--white); padding: .75rem 1rem;
-      font-family: 'Instrument Sans', sans-serif; font-size: .88rem;
+      background: var(--bg3); border: 1.5px solid var(--gray2); color: var(--white);
+      padding: .75rem 1rem; font-family: 'Instrument Sans', sans-serif; font-size: .88rem;
       outline: none; transition: border-color .22s;
     }
     .cf-input:focus, .cf-textarea:focus { border-color: var(--accent); }
     .cf-textarea { resize: vertical; min-height: 110px; }
     .cf-submit {
-      background: var(--accent); color: var(--bg);
-      border: none; padding: .85rem;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: .82rem; font-weight: 700;
-      letter-spacing: .08em; text-transform: uppercase;
-      cursor: pointer; transition: opacity .2s;
+      background: var(--accent); color: var(--bg); border: none; padding: .85rem;
+      font-family: 'Instrument Sans', sans-serif; font-size: .82rem; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase; cursor: pointer; transition: opacity .2s;
     }
     .cf-submit:hover { opacity: .85; }
     .cf-success {
       display: none; text-align: center; padding: 1.5rem;
-      background: rgba(79,142,247,.05);
-      border: 1px solid rgba(79,142,247,.2);
+      background: rgba(79,142,247,.05); border: 1px solid rgba(79,142,247,.2);
       font-size: .88rem; color: var(--accent);
     }
 
     /* ── FOOTER ── */
     footer {
       background: var(--bg2); border-top: 1px solid var(--line);
-      padding: 2rem 3rem;
-      display: flex; align-items: center; justify-content: space-between;
+      padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between;
     }
-    .footer-logo {
-      font-family: 'Fraunces', serif;
-      font-size: .95rem; font-weight: 800;
-      color: var(--white); text-decoration: none;
-    }
+    .footer-logo { font-family: 'Fraunces', serif; font-size: .95rem; font-weight: 800; color: var(--white); text-decoration: none; }
     .footer-logo em { color: var(--accent); font-style: normal; }
-    footer p { font-size: .75rem; color: var(--gray); }
+    footer p { font-size: .72rem; color: var(--gray); }
     .footer-socials { display: flex; gap: 1rem; }
     .footer-social {
       width: 34px; height: 34px; border: 1px solid var(--gray2);
       display: flex; align-items: center; justify-content: center;
       text-decoration: none; transition: border-color .2s, background .2s;
     }
-    .footer-social:hover { border-color: var(--accent); background: rgba(79,142,247,.08); }
+    .footer-social:hover { border-color: var(--accent); background: rgba(79,142,247,.07); }
     .footer-social svg { width: 14px; height: 14px; fill: var(--gray); transition: fill .2s; }
     .footer-social:hover svg { fill: var(--accent); }
 
@@ -643,10 +518,7 @@
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .reveal {
-      opacity: 0; transform: translateY(28px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ── RESPONSIVE ── */
@@ -655,17 +527,24 @@
       .nav-links { display: none; }
       .hamburger { display: flex; }
       .lang-toggle { display: none; }
-      .hero { padding: 7rem 1.5rem 4rem; }
-      .hero-stats { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
-      .hero-photo { width: 130px; height: 130px; }
+      .hero { padding: 7rem 1.5rem 5rem; }
+      .hero-meta { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
+      .hero-meta-item:nth-child(2) { border-right: none; }
+      .hero-meta-item:nth-child(3) { border-top: 1px solid var(--line); }
+      .hero-meta-item:nth-child(4) { border-top: 1px solid var(--line); border-right: none; }
+      .hero-photo { width: 128px; height: 128px; }
       .hero-photo .initials { font-size: 2rem; }
       .profiles-grid { grid-template-columns: 1fr; gap: 1rem; }
       .about-inner { grid-template-columns: 1fr; gap: 3rem; }
       .services-grid { grid-template-columns: 1fr; }
       .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
       .section { padding: 5rem 1.5rem; }
-      .project-row { padding: 1.5rem; gap: 1rem; grid-template-columns: 60px 1fr auto; }
+      .project-row { padding: 1.4rem 1.2rem; gap: 1rem; grid-template-columns: 64px 1fr auto; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+    @media(max-width: 480px) {
+      .hero-roles { flex-direction: column; align-items: center; }
+      .hero-meta { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -676,10 +555,10 @@
   <a href="#" class="nav-logo">Isaac <em>D.</em></a>
   <ul class="nav-links">
     <li><a href="#profiles" data-en="Profiles" data-fr="Profils">Profiles</a></li>
-    <li><a href="#projects" data-en="Projects" data-fr="Projets">Projects</a></li>
+    <li><a href="#projects" data-en="Work" data-fr="Travaux">Work</a></li>
     <li><a href="#about" data-en="About" data-fr="À propos">About</a></li>
     <li><a href="#services" data-en="Services" data-fr="Services">Services</a></li>
-    <li><a href="digital-page.html" data-en="My Digital Page" data-fr="Ma page digitale">My Digital Page</a></li>
+    <li><a href="digital-page.html" data-en="Digital Page" data-fr="Page digitale">Digital Page</a></li>
     <li><a href="#contact" class="nav-cta" data-en="Hire Me" data-fr="Me contacter">Hire Me</a></li>
   </ul>
   <div class="lang-toggle">
@@ -694,11 +573,11 @@
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <ul>
-    <li><a href="#profiles" onclick="closeMobileMenu()" data-en="Profiles" data-fr="Profils">Profiles</a></li>
-    <li><a href="#projects" onclick="closeMobileMenu()" data-en="Projects" data-fr="Projets">Projects</a></li>
-    <li><a href="#about" onclick="closeMobileMenu()" data-en="About" data-fr="À propos">About</a></li>
-    <li><a href="#services" onclick="closeMobileMenu()" data-en="Services" data-fr="Services">Services</a></li>
-    <li><a href="digital-page.html" onclick="closeMobileMenu()" data-en="My Digital Page" data-fr="Ma page digitale">My Digital Page</a></li>
+    <li><a href="#profiles"      onclick="closeMobileMenu()" data-en="Profiles"     data-fr="Profils">Profiles</a></li>
+    <li><a href="#projects"      onclick="closeMobileMenu()" data-en="Work"          data-fr="Travaux">Work</a></li>
+    <li><a href="#about"         onclick="closeMobileMenu()" data-en="About"         data-fr="À propos">About</a></li>
+    <li><a href="#services"      onclick="closeMobileMenu()" data-en="Services"      data-fr="Services">Services</a></li>
+    <li><a href="digital-page.html" onclick="closeMobileMenu()" data-en="Digital Page" data-fr="Page digitale">Digital Page</a></li>
   </ul>
   <a href="#contact" class="mob-cta" onclick="closeMobileMenu()" data-en="Hire Me" data-fr="Me contacter">Hire Me</a>
   <div class="mob-lang">
@@ -707,27 +586,59 @@
   </div>
 </div>
 
-<!-- HERO -->
+<!-- ══ HERO ══ -->
 <section class="hero" id="home">
   <div class="hero-inner">
-    <div class="hero-photo">
-      <!-- Replace with: <img src="photo.jpg" alt="Isaac Dossavou"> -->
-      <span class="initials">I.D.</span>
+
+    <!-- Availability status -->
+    <div class="hero-status">
+      <span class="status-dot"></span>
+      <span data-en="Open for opportunities · Omaha, NE · UTC-6" data-fr="Disponible · Omaha, NE · UTC-6">Open for opportunities · Omaha, NE · UTC-6</span>
     </div>
 
+    <!-- Photo — replace initials with <img> when ready -->
+    <div class="hero-photo">
+      <span class="initials">I.D.</span>
+    </div>
+    <div class="hero-fig">FIG. 1 — Isaac Dossavou</div>
+
+    <!-- Name -->
     <h1 class="hero-name">Isaac Dossavou</h1>
 
+    <!-- Role badges -->
     <div class="hero-roles">
       <span class="role-badge data-badge" data-en="📊 Statistician · Economist" data-fr="📊 Statisticien · Économiste">📊 Statistician · Economist</span>
       <span class="role-badge dev-badge"  data-en="💻 Software Engineer · Full-Stack" data-fr="💻 Ingénieur Logiciel · Full-Stack">💻 Software Engineer · Full-Stack</span>
     </div>
 
-    <p class="hero-desc"
-       data-en="Two degrees, two disciplines — one vision. I analyze data and build software that turns insight into impact. Based in Omaha, NE."
-       data-fr="Deux diplômes, deux disciplines — une vision. J'analyse les données et je construis des logiciels qui transforment les insights en impact. Basé à Omaha, NE.">
-      Two degrees, two disciplines — one vision. I analyze data and build software that turns insight into impact. Based in Omaha, NE.
+    <!-- Positioning statement (bolablg.com-inspired) -->
+    <p class="hero-statement"
+       data-en="&ldquo;I build data systems and software that turn complex problems into clear decisions — so businesses run on insight, not assumptions.&rdquo;"
+       data-fr="&ldquo;Je construis des systèmes data et des logiciels qui transforment les problèmes complexes en décisions claires — pour que les entreprises avancent avec certitude.&rdquo;">
+      &ldquo;I build data systems and software that turn complex problems into clear decisions — so businesses run on insight, not assumptions.&rdquo;
     </p>
 
+    <!-- Metadata block (bolablg.com-inspired: Role | Education | Location | Status) -->
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="meta-label" data-en="Role" data-fr="Rôle">Role</span>
+        <span class="meta-val" data-en="Data &amp; Developer" data-fr="Data &amp; Développeur">Data &amp; Developer</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="meta-label" data-en="Education" data-fr="Formation">Education</span>
+        <span class="meta-val">M.S. Statistics<br>A.S. Comp. Sci.</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="meta-label" data-en="Based" data-fr="Basé à">Based</span>
+        <span class="meta-val">Omaha, NE<br>United States</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="meta-label" data-en="Status" data-fr="Statut">Status</span>
+        <span class="meta-val open" data-en="Open · UTC-6" data-fr="Disponible · UTC-6">Open · UTC-6</span>
+      </div>
+    </div>
+
+    <!-- CTAs -->
     <div class="hero-actions">
       <a href="#profiles" class="btn-data" onclick="filterProjects('data')">
         <span data-en="📊 Data Profile" data-fr="📊 Profil Data">📊 Data Profile</span>
@@ -737,47 +648,31 @@
       </a>
     </div>
 
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="num data-num">M.S.</div>
-        <div class="label" data-en="Statistics" data-fr="Statistiques">Statistics</div>
-      </div>
-      <div class="hero-stat">
-        <div class="num dev-num">A.S.</div>
-        <div class="label" data-en="Computer Science" data-fr="Informatique">Computer Science</div>
-      </div>
-      <div class="hero-stat">
-        <div class="num" style="color:var(--white)">5<sup style="font-size:.9rem">+</sup></div>
-        <div class="label" data-en="Projects Built" data-fr="Projets réalisés">Projects Built</div>
-      </div>
-      <div class="hero-stat">
-        <div class="num" style="color:var(--white)">2</div>
-        <div class="label" data-en="Disciplines" data-fr="Disciplines">Disciplines</div>
-      </div>
-    </div>
   </div>
 </section>
 
-<!-- PROFILES -->
+<!-- ══ [01] PROFILES ══ -->
 <section class="profiles section" id="profiles">
   <div class="section-inner">
-    <div class="section-tag reveal" data-en="My Profiles" data-fr="Mes profils">My Profiles</div>
+    <div class="section-tag reveal">
+      <span class="st-num">[01]</span>
+      <span class="st-label" data-en="My Profiles" data-fr="Mes profils">My Profiles</span>
+    </div>
     <h2 class="section-heading reveal">
       <span data-en="Two disciplines," data-fr="Deux disciplines,">Two disciplines,</span><br/>
-      <span class="span" data-en="one vision." data-fr="une vision.">one vision.</span>
+      <span class="hl" data-en="one vision." data-fr="une vision.">one vision.</span>
     </h2>
 
     <div class="profiles-grid reveal" style="transition-delay:.1s">
 
-      <!-- DATA CARD -->
       <a href="#projects" class="profile-card data-card" onclick="filterProjects('data')">
         <span class="profile-icon">📊</span>
         <div class="profile-label data-label" data-en="Data Profile" data-fr="Profil Data">Data Profile</div>
         <h3 class="profile-title" data-en="Statistician &amp; Economist" data-fr="Statisticien &amp; Économiste">Statistician &amp; Economist</h3>
         <p class="profile-desc"
-           data-en="Master's in Statistics. I design predictive models, run economic analyses, and build data pipelines that turn raw numbers into clear decisions."
+           data-en="Master's in Statistics. I design predictive models, run economic analyses, and build data pipelines that turn raw numbers into clear, actionable decisions."
            data-fr="Master en Statistiques. Je conçois des modèles prédictifs, mène des analyses économiques et construis des pipelines de données qui transforment les chiffres bruts en décisions claires.">
-          Master's in Statistics. I design predictive models, run economic analyses, and build data pipelines that turn raw numbers into clear decisions.
+          Master's in Statistics. I design predictive models, run economic analyses, and build data pipelines that turn raw numbers into clear, actionable decisions.
         </p>
         <div class="profile-skills">
           <span class="skill-chip data-chip">Python</span>
@@ -790,15 +685,14 @@
         <div class="profile-cta" data-en="View Data Projects →" data-fr="Voir projets Data →">View Data Projects →</div>
       </a>
 
-      <!-- DEV CARD -->
       <a href="#projects" class="profile-card dev-card" onclick="filterProjects('dev')">
         <span class="profile-icon">💻</span>
         <div class="profile-label dev-label" data-en="Dev Profile" data-fr="Profil Dev">Dev Profile</div>
         <h3 class="profile-title" data-en="Software Engineer · Full-Stack" data-fr="Ingénieur Logiciel · Full-Stack">Software Engineer · Full-Stack</h3>
         <p class="profile-desc"
-           data-en="Associate's in Computer Science. I build web applications end-to-end — from pixel-perfect interfaces to scalable back-end systems with databases and real-time features."
-           data-fr="Associate en Informatique. Je construis des applications web de bout en bout — des interfaces soignées aux systèmes back-end évolutifs avec bases de données et fonctionnalités temps réel.">
-          Associate's in Computer Science. I build web applications end-to-end — from pixel-perfect interfaces to scalable back-end systems with databases and real-time features.
+           data-en="Associate's in Computer Science. I build web applications end-to-end — from pixel-perfect interfaces to scalable back-end systems with real-time databases."
+           data-fr="Associate en Informatique. Je construis des applications web de bout en bout — des interfaces soignées aux systèmes back-end évolutifs avec bases de données temps réel.">
+          Associate's in Computer Science. I build web applications end-to-end — from pixel-perfect interfaces to scalable back-end systems with real-time databases.
         </p>
         <div class="profile-skills">
           <span class="skill-chip dev-chip">React</span>
@@ -815,13 +709,16 @@
   </div>
 </section>
 
-<!-- PROJECTS -->
+<!-- ══ [02] SELECTED WORK ══ -->
 <section class="projects section" id="projects">
   <div class="section-inner">
-    <div class="section-tag reveal" data-en="Selected Work" data-fr="Travaux sélectionnés">Selected Work</div>
+    <div class="section-tag reveal">
+      <span class="st-num">[02]</span>
+      <span class="st-label" data-en="Selected Work" data-fr="Travaux sélectionnés">Selected Work</span>
+    </div>
     <h2 class="section-heading reveal">
       <span data-en="Projects that" data-fr="Projets qui">Projects that</span><br/>
-      <span data-en="speak for" data-fr="parlent">speak for</span> <span class="span" data-en="themselves." data-fr="d'eux-mêmes.">themselves.</span>
+      <span class="hl" data-en="speak for themselves." data-fr="parlent d'eux-mêmes.">speak for themselves.</span>
     </h2>
 
     <div class="filter-tabs reveal" style="transition-delay:.05s">
@@ -838,163 +735,147 @@
 
     <div class="projects-grid reveal" style="transition-delay:.12s">
 
-      <!-- ── DATA PROJECTS ── -->
+      <!-- DATA PROJECTS -->
       <a href="#" class="project-row" data-category="data">
         <div class="project-num">
           <span class="num-tag">D01</span>
           <span class="cat-tag data" data-en="Data" data-fr="Data">Data</span>
+          <span class="proj-year">2025</span>
         </div>
         <div class="project-info">
           <div class="project-title" data-en="Statistical Modeling &amp; Forecasting" data-fr="Modélisation Statistique &amp; Prévision">Statistical Modeling &amp; Forecasting</div>
-          <div class="project-desc" data-en="Designed and implemented predictive models using regression, time series, and machine learning. Delivered forecasting reports with 87%+ accuracy on economic indicators." data-fr="Modèles prédictifs par régression, séries temporelles et machine learning. Rapports de prévision avec 87%+ de précision sur des indicateurs économiques.">Designed and implemented predictive models using regression, time series, and machine learning. Delivered forecasting reports with 87%+ accuracy on economic indicators.</div>
+          <div class="project-desc" data-en="Predictive models using regression, time series, and machine learning. Forecasting reports with 87%+ accuracy on economic indicators." data-fr="Modèles prédictifs par régression, séries temporelles et machine learning. Prévisions à 87%+ de précision sur des indicateurs économiques.">Predictive models using regression, time series, and machine learning. Forecasting reports with 87%+ accuracy on economic indicators.</div>
           <div class="project-tags">
-            <span class="project-tag">Python</span>
-            <span class="project-tag">R</span>
-            <span class="project-tag">Time Series</span>
-            <span class="project-tag">Regression</span>
+            <span class="project-tag">Python</span><span class="project-tag">R</span>
+            <span class="project-tag">Time Series</span><span class="project-tag">Regression</span>
           </div>
         </div>
-        <div class="project-arrow">
-          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </div>
+        <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
 
       <a href="#" class="project-row" data-category="data">
         <div class="project-num">
           <span class="num-tag">D02</span>
           <span class="cat-tag data" data-en="Data" data-fr="Data">Data</span>
+          <span class="proj-year">2025</span>
         </div>
         <div class="project-info">
           <div class="project-title" data-en="Economic Analysis &amp; Reporting" data-fr="Analyse Économique &amp; Rapports">Economic Analysis &amp; Reporting</div>
-          <div class="project-desc" data-en="Comprehensive data pipeline for economic data collection, cleaning, visualization, and automated report generation. Built with Python, SQL, and interactive dashboards." data-fr="Pipeline complet pour la collecte, le nettoyage, la visualisation de données économiques et la génération automatisée de rapports. Construit avec Python, SQL et dashboards interactifs.">Comprehensive data pipeline for economic data collection, cleaning, visualization, and automated report generation. Built with Python, SQL, and interactive dashboards.</div>
+          <div class="project-desc" data-en="End-to-end data pipeline for economic data — collection, cleaning, visualization, and automated report generation with Python and SQL." data-fr="Pipeline data complet pour données économiques — collecte, nettoyage, visualisation et génération automatisée de rapports avec Python et SQL.">End-to-end data pipeline for economic data — collection, cleaning, visualization, and automated report generation with Python and SQL.</div>
           <div class="project-tags">
-            <span class="project-tag">Python</span>
-            <span class="project-tag">SQL</span>
-            <span class="project-tag">Pandas</span>
-            <span class="project-tag">Data Viz</span>
+            <span class="project-tag">Python</span><span class="project-tag">SQL</span>
+            <span class="project-tag">Pandas</span><span class="project-tag">Data Viz</span>
           </div>
         </div>
-        <div class="project-arrow">
-          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </div>
+        <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
 
       <a href="attachment-test.html" class="project-row" data-category="data">
         <div class="project-num">
           <span class="num-tag">D03</span>
           <span class="cat-tag data" data-en="Data" data-fr="Data">Data</span>
+          <span class="proj-year">2025</span>
         </div>
         <div class="project-info">
           <div class="project-title" data-en="Attachment Style Questionnaire" data-fr="Questionnaire Style d'Attachement">Attachment Style Questionnaire</div>
-          <div class="project-desc" data-en="Bilingual psychological assessment tool. 42-question scientifically-grounded test with scoring algorithm. Identifies Anxious, Secure, or Avoidant attachment profiles." data-fr="Outil d'évaluation psychologique bilingue. Test de 42 questions scientifiquement fondé avec algorithme de scoring. Identifie les profils Anxieux, Confiant ou Évitant.">Bilingual psychological assessment tool. 42-question scientifically-grounded test with scoring algorithm. Identifies Anxious, Secure, or Avoidant attachment profiles.</div>
+          <div class="project-desc" data-en="Bilingual psychological assessment. 42-question scientifically-grounded test with scoring algorithm — identifies Anxious, Secure, or Avoidant profiles." data-fr="Évaluation psychologique bilingue. Test de 42 questions fondé scientifiquement avec algorithme de scoring — identifie les profils Anxieux, Confiant ou Évitant.">Bilingual psychological assessment. 42-question scientifically-grounded test with scoring algorithm — identifies Anxious, Secure, or Avoidant profiles.</div>
           <div class="project-tags">
-            <span class="project-tag">Statistics</span>
-            <span class="project-tag">Psychology</span>
-            <span class="project-tag">Bilingual</span>
-            <span class="project-tag">Web App</span>
+            <span class="project-tag">Statistics</span><span class="project-tag">Psychology</span>
+            <span class="project-tag">Bilingual</span><span class="project-tag">Web App</span>
           </div>
         </div>
-        <div class="project-arrow">
-          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </div>
+        <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
 
-      <!-- ── DEV PROJECTS ── -->
+      <!-- DEV PROJECTS -->
       <a href="#" class="project-row" data-category="dev">
         <div class="project-num">
           <span class="num-tag">W01</span>
           <span class="cat-tag dev" data-en="Dev" data-fr="Dev">Dev</span>
+          <span class="proj-year">2024</span>
         </div>
         <div class="project-info">
           <div class="project-title" data-en="Winner Chapel at Omaha" data-fr="Winner Chapel à Omaha">Winner Chapel at Omaha</div>
-          <div class="project-desc" data-en="Complete church website — 7 pages, dynamic event system with Supabase, admin panel with real-time registration notifications, bilingual-ready design." data-fr="Site complet pour une église — 7 pages, système d'événements dynamique avec Supabase, panneau admin avec notifications en temps réel, design bilingue.">Complete church website — 7 pages, dynamic event system with Supabase, admin panel with real-time registration notifications, bilingual-ready design.</div>
+          <div class="project-desc" data-en="Complete church website — 7 pages, dynamic event system with Supabase, admin panel with real-time registration notifications, bilingual design." data-fr="Site complet pour une église — 7 pages, système d'événements dynamique avec Supabase, panneau admin avec notifications en temps réel, design bilingue.">Complete church website — 7 pages, dynamic event system with Supabase, admin panel with real-time registration notifications, bilingual design.</div>
           <div class="project-tags">
-            <span class="project-tag">HTML/CSS/JS</span>
-            <span class="project-tag">Supabase</span>
-            <span class="project-tag">Admin Panel</span>
-            <span class="project-tag">Responsive</span>
+            <span class="project-tag">HTML/CSS/JS</span><span class="project-tag">Supabase</span>
+            <span class="project-tag">Admin Panel</span><span class="project-tag">Responsive</span>
           </div>
         </div>
-        <div class="project-arrow">
-          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </div>
+        <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
 
       <a href="#" class="project-row" data-category="dev">
         <div class="project-num">
           <span class="num-tag">W02</span>
           <span class="cat-tag dev" data-en="Dev" data-fr="Dev">Dev</span>
+          <span class="proj-year">2025</span>
         </div>
         <div class="project-info">
           <div class="project-title">ShiftOS</div>
-          <div class="project-desc" data-en="Workforce management platform for call centers and 24/7 businesses. 3 user roles, schedule generation algorithm, Supabase backend, RLS policies." data-fr="Plateforme de gestion de la main-d'œuvre pour call centers. 3 rôles utilisateurs, algorithme de génération de planning, backend Supabase, politiques RLS.">Workforce management platform for call centers and 24/7 businesses. 3 user roles, schedule generation algorithm, Supabase backend, RLS policies.</div>
+          <div class="project-desc" data-en="Workforce management platform for call centers. 3 user roles, schedule generation algorithm, Supabase backend with RLS policies." data-fr="Plateforme de gestion des effectifs pour call centers. 3 rôles, algorithme de génération de plannings, backend Supabase avec politiques RLS.">Workforce management platform for call centers. 3 user roles, schedule generation algorithm, Supabase backend with RLS policies.</div>
           <div class="project-tags">
-            <span class="project-tag">React</span>
-            <span class="project-tag">Supabase</span>
-            <span class="project-tag">RLS</span>
-            <span class="project-tag">Algorithm</span>
+            <span class="project-tag">React</span><span class="project-tag">Supabase</span>
+            <span class="project-tag">RLS</span><span class="project-tag">Algorithm</span>
           </div>
         </div>
-        <div class="project-arrow">
-          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </div>
+        <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
 
       <a href="digital-page.html" class="project-row" data-category="dev">
         <div class="project-num">
           <span class="num-tag">W03</span>
           <span class="cat-tag dev" data-en="Dev" data-fr="Dev">Dev</span>
+          <span class="proj-year">2025</span>
         </div>
         <div class="project-info">
           <div class="project-title" data-en="My Digital Page" data-fr="Ma Page Digitale">My Digital Page</div>
-          <div class="project-desc" data-en="Linktree-style personal landing page with cascade animation, social media integration (YouTube, TikTok, Snapchat, Facebook). Clean, minimal design." data-fr="Page d'atterrissage personnelle style Linktree avec animation en cascade, intégration réseaux sociaux (YouTube, TikTok, Snapchat, Facebook). Design épuré et minimal.">Linktree-style personal landing page with cascade animation, social media integration (YouTube, TikTok, Snapchat, Facebook). Clean, minimal design.</div>
+          <div class="project-desc" data-en="Linktree-style personal landing page with cascade animation, real social media integration (YouTube, TikTok, Snapchat, Facebook). Minimal design." data-fr="Page personnelle style Linktree avec animation en cascade, vrais liens réseaux sociaux (YouTube, TikTok, Snapchat, Facebook). Design minimal.">Linktree-style personal landing page with cascade animation, real social media integration (YouTube, TikTok, Snapchat, Facebook). Minimal design.</div>
           <div class="project-tags">
-            <span class="project-tag">HTML/CSS/JS</span>
-            <span class="project-tag">Animation</span>
+            <span class="project-tag">HTML/CSS/JS</span><span class="project-tag">Animation</span>
             <span class="project-tag">Design</span>
           </div>
         </div>
-        <div class="project-arrow">
-          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </div>
+        <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
 
       <!-- CTA ROW -->
       <a href="#contact" class="project-row cta-row">
         <div class="project-num">
-          <span class="num-tag" style="color:var(--accent)">+</span>
+          <span class="num-tag" style="color:var(--accent); font-size:1.1rem">+</span>
         </div>
         <div class="project-info">
           <div class="project-title" data-en="Your Project Here" data-fr="Votre projet ici">Your Project Here</div>
-          <div class="project-desc" data-en="Have a business, a nonprofit, or an idea? Let's build something great together. Data or dev — I've got you covered." data-fr="Vous avez une entreprise, une association ou une idée ? Construisons quelque chose de grand ensemble. Data ou dev — je suis là pour vous.">Have a business, a nonprofit, or an idea? Let's build something great together. Data or dev — I've got you covered.</div>
+          <div class="project-desc" data-en="Have a business, a nonprofit, or an idea? Data or dev — I've got you covered. Let's build something great together." data-fr="Vous avez une entreprise, une association ou une idée ? Data ou dev — je suis là. Construisons quelque chose de grand ensemble.">Have a business, a nonprofit, or an idea? Data or dev — I've got you covered. Let's build something great together.</div>
           <div class="project-tags">
             <span class="project-tag" data-en="Your Stack" data-fr="Votre stack">Your Stack</span>
             <span class="project-tag" data-en="Your Vision" data-fr="Votre vision">Your Vision</span>
           </div>
         </div>
-        <div class="project-arrow">
-          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-        </div>
+        <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
       </a>
 
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- ══ [03] ABOUT ══ -->
 <section class="about section" id="about">
   <div class="about-inner">
     <div class="about-text reveal">
-      <div class="section-tag" data-en="About Me" data-fr="À propos">About Me</div>
+      <div class="section-tag">
+        <span class="st-num">[03]</span>
+        <span class="st-label" data-en="About Me" data-fr="À propos">About Me</span>
+      </div>
       <h2 class="section-heading" style="margin-bottom:1.5rem">
         <span data-en="Code meets" data-fr="Le code rencontre">Code meets</span><br/>
-        <span class="span" data-en="data." data-fr="les données.">data.</span>
+        <span class="hl" data-en="data." data-fr="les données.">data.</span>
       </h2>
       <p data-en="I'm a Full-Stack Developer and Statistician based in Omaha, Nebraska. I hold an Associate's degree in Computer Science and a Master's in Statistics — two disciplines that let me build complete, data-driven solutions from the ground up." data-fr="Je suis Développeur Full-Stack et Statisticien basé à Omaha, Nebraska. Je possède un Associate's en Informatique et un Master en Statistiques — deux disciplines qui me permettent de construire des solutions complètes et orientées données.">
         I'm a Full-Stack Developer and Statistician based in Omaha, Nebraska. I hold an Associate's degree in Computer Science and a Master's in Statistics — two disciplines that let me build complete, data-driven solutions from the ground up.
       </p>
-      <p data-en="Currently working at Walmart while actively pursuing software engineering and data opportunities. I build real projects — not just exercises — including a complete church website, ShiftOS, and psychological assessment tools." data-fr="Je cherche activement des opportunités en ingénierie logicielle et en data. Je construis de vrais projets — pas juste des exercices — dont un site complet pour une église, ShiftOS, et des outils d'évaluation psychologique.">
-        I build real projects — not just exercises — including a complete church website, ShiftOS, and psychological assessment tools.
+      <p data-en="Currently working at Walmart while actively pursuing software engineering and data opportunities. I build real projects — not just exercises — including a complete church website, ShiftOS, and statistical assessment tools." data-fr="Je cherche activement des opportunités en ingénierie logicielle et en data. Je construis de vrais projets — pas juste des exercices — dont un site complet pour une église, ShiftOS, et des outils d'évaluation statistique.">
+        I build real projects — not just exercises — including a complete church website, ShiftOS, and statistical assessment tools.
       </p>
       <div class="about-highlight" data-en="&ldquo;I don't just write code — I solve problems and build experiences that last.&rdquo;" data-fr="&ldquo;Je n'écris pas juste du code — je résous des problèmes et je construis des expériences durables.&rdquo;">
         &ldquo;I don't just write code — I solve problems and build experiences that last.&rdquo;
@@ -1016,7 +897,7 @@
         </div>
         <div>
           <div class="about-card-title" data-en="Statistical Analysis" data-fr="Analyse Statistique">Statistical Analysis</div>
-          <div class="about-card-desc" data-en="Master's in Statistics. Predictive modeling, forecasting, economic analysis, and data-driven decision making." data-fr="Master en Statistiques. Modélisation prédictive, prévision, analyse économique et prise de décision orientée données.">Master's in Statistics. Predictive modeling, forecasting, economic analysis, and data-driven decision making.</div>
+          <div class="about-card-desc" data-en="Master's in Statistics. Predictive modeling, forecasting, economic analysis, data-driven decisions." data-fr="Master en Statistiques. Modélisation prédictive, prévision, analyse économique, décisions orientées données.">Master's in Statistics. Predictive modeling, forecasting, economic analysis, data-driven decisions.</div>
         </div>
       </div>
       <div class="about-card">
@@ -1025,20 +906,23 @@
         </div>
         <div>
           <div class="about-card-title" data-en="UI/UX Design" data-fr="Design UI/UX">UI/UX Design</div>
-          <div class="about-card-desc" data-en="Clean, modern interfaces that are intuitive and conversion-focused. Custom-built for each project — no templates." data-fr="Interfaces propres et modernes, intuitives et orientées conversion. Construit sur mesure pour chaque projet — pas de templates.">Clean, modern interfaces that are intuitive and conversion-focused. Custom-built for each project — no templates.</div>
+          <div class="about-card-desc" data-en="Clean, modern interfaces that are intuitive and focused. Custom-built — no templates." data-fr="Interfaces propres et modernes, intuitives et focalisées. Construit sur mesure — pas de templates.">Clean, modern interfaces that are intuitive and focused. Custom-built — no templates.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- ══ [04] SERVICES ══ -->
 <section class="services section" id="services">
   <div class="section-inner">
-    <div class="section-tag reveal" data-en="What I Offer" data-fr="Ce que je propose">What I Offer</div>
+    <div class="section-tag reveal">
+      <span class="st-num">[04]</span>
+      <span class="st-label" data-en="What I Offer" data-fr="Ce que je propose">What I Offer</span>
+    </div>
     <h2 class="section-heading reveal">
       <span data-en="Simple pricing," data-fr="Tarifs simples,">Simple pricing,</span><br/>
-      <span class="span" data-en="real results." data-fr="vrais résultats.">real results.</span>
+      <span class="hl" data-en="real results." data-fr="vrais résultats.">real results.</span>
     </h2>
     <div class="services-grid reveal" style="transition-delay:.1s">
 
@@ -1058,12 +942,12 @@
         <span class="featured-badge" data-en="Most Popular" data-fr="Le plus demandé">Most Popular</span>
         <div class="service-price">$900</div>
         <div class="service-name" data-en="Business" data-fr="Business">Business</div>
-        <div class="service-desc" data-en="Everything a growing business or organization needs — built to last." data-fr="Tout ce dont une entreprise ou organisation en croissance a besoin — conçu pour durer.">Everything a growing business or organization needs — built to last.</div>
+        <div class="service-desc" data-en="Everything a growing business needs — built to last." data-fr="Tout ce dont une entreprise en croissance a besoin — conçu pour durer.">Everything a growing business needs — built to last.</div>
         <ul class="service-features">
           <li data-en="6–8 pages" data-fr="6–8 pages">6–8 pages</li>
           <li data-en="Database (Supabase)" data-fr="Base de données (Supabase)">Database (Supabase)</li>
           <li data-en="Admin panel" data-fr="Panneau admin">Admin panel</li>
-          <li data-en="Forms + data storage" data-fr="Formulaires + sauvegarde données">Forms + data storage</li>
+          <li data-en="Forms + data storage" data-fr="Formulaires + données">Forms + data storage</li>
           <li data-en="Custom domain setup" data-fr="Configuration domaine">Custom domain setup</li>
           <li data-en="Client training included" data-fr="Formation client incluse">Client training included</li>
         </ul>
@@ -1086,11 +970,14 @@
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- ══ [05] CONTACT ══ -->
 <section class="contact section" id="contact">
   <div class="contact-inner">
     <div class="contact-left reveal">
-      <div class="section-tag" data-en="Let's Work Together" data-fr="Travaillons ensemble">Let's Work Together</div>
+      <div class="section-tag">
+        <span class="st-num">[05]</span>
+        <span class="st-label" data-en="Get in Touch" data-fr="Me contacter">Get in Touch</span>
+      </div>
       <h2>
         <span data-en="Ready to build" data-fr="Prêt à construire">Ready to build</span><br/>
         <span data-en="something" data-fr="quelque chose">something</span><br/>
@@ -1134,11 +1021,11 @@
         <div class="cf-group">
           <label class="cf-label" data-en="Project Type" data-fr="Type de projet">Project Type</label>
           <select class="cf-input" id="cfType" style="appearance:none">
-            <option data-en="Starter — $400" data-fr="Démarrage — 400$">Starter — $400</option>
-            <option data-en="Business — $900" data-fr="Business — 900$">Business — $900</option>
-            <option data-en="Premium — $1,800+" data-fr="Premium — 1 800$+">Premium — $1,800+</option>
-            <option data-en="Data Analysis / Statistics" data-fr="Analyse de données / Statistiques">Data Analysis / Statistics</option>
-            <option data-en="Not sure yet" data-fr="Pas encore sûr">Not sure yet</option>
+            <option data-en="Starter — $400"              data-fr="Démarrage — 400$">Starter — $400</option>
+            <option data-en="Business — $900"             data-fr="Business — 900$">Business — $900</option>
+            <option data-en="Premium — $1,800+"           data-fr="Premium — 1 800$+">Premium — $1,800+</option>
+            <option data-en="Data Analysis / Statistics"  data-fr="Analyse de données / Statistiques">Data Analysis / Statistics</option>
+            <option data-en="Not sure yet"                data-fr="Pas encore sûr">Not sure yet</option>
           </select>
         </div>
         <div class="cf-group">
@@ -1160,7 +1047,7 @@
 <!-- FOOTER -->
 <footer>
   <a href="#home" class="footer-logo">Isaac <em>D.</em></a>
-  <p data-en="© 2025 Isaac Dossavou. All rights reserved." data-fr="© 2025 Isaac Dossavou. Tous droits réservés.">© 2025 Isaac Dossavou. All rights reserved.</p>
+  <p data-en="© 2025 Isaac Dossavou · All rights reserved." data-fr="© 2025 Isaac Dossavou · Tous droits réservés.">© 2025 Isaac Dossavou · All rights reserved.</p>
   <div class="footer-socials">
     <a href="https://github.com/alowakin" target="_blank" class="footer-social" title="GitHub">
       <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
@@ -1203,15 +1090,14 @@
       const text = el.getAttribute('data-' + lang);
       if (text) el.innerHTML = text;
     });
-    const placeholders = {
-      en: { name: 'John Doe', email: 'john@company.com', phone: '+1 (555) 000-0000', msg: "What do you need? What's your timeline?" },
-      fr: { name: 'Jean Dupont', email: 'jean@entreprise.com', phone: '+33 6 00 00 00 00', msg: "De quoi avez-vous besoin ? Quel est votre délai ?" }
-    };
-    const p = placeholders[lang];
-    document.getElementById('cfName').placeholder  = p.name;
-    document.getElementById('cfEmail').placeholder = p.email;
-    document.getElementById('cfPhone').placeholder = p.phone;
-    document.getElementById('cfMsg').placeholder   = p.msg;
+    const ph = {
+      en: { name:'John Doe', email:'john@company.com', phone:'+1 (555) 000-0000', msg:"What do you need? What's your timeline?" },
+      fr: { name:'Jean Dupont', email:'jean@entreprise.com', phone:'+33 6 00 00 00 00', msg:"De quoi avez-vous besoin ? Quel est votre délai ?" }
+    }[lang];
+    document.getElementById('cfName').placeholder  = ph.name;
+    document.getElementById('cfEmail').placeholder = ph.email;
+    document.getElementById('cfPhone').placeholder = ph.phone;
+    document.getElementById('cfMsg').placeholder   = ph.msg;
     document.querySelectorAll('select option[data-' + lang + ']').forEach(opt => {
       opt.textContent = opt.getAttribute('data-' + lang);
     });
@@ -1235,7 +1121,7 @@
   // ── SCROLL REVEAL ──
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: .12 });
+  }, { threshold: .1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   // ── CONTACT FORM ──
@@ -1256,18 +1142,13 @@
       const res = await fetch('https://formsubmit.co/ajax/isaacdossavou@gmail.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          name, email,
-          phone: phone || 'Non fourni',
-          subject: `[Portfolio] Nouvelle demande : ${type}`,
-          message: msg
-        })
+        body: JSON.stringify({ name, email, phone: phone || 'Non fourni', subject: `[Portfolio] ${type}`, message: msg })
       });
       const data = await res.json();
       if (data.success === 'true' || data.success === true) {
         document.getElementById('contactForm').style.display = 'none';
         document.getElementById('cfSuccess').style.display   = 'block';
-      } else { throw new Error('failed'); }
+      } else { throw new Error(); }
     } catch {
       alert(currentLang === 'fr' ? "Erreur lors de l'envoi. Réessayez." : 'Send failed. Please try again.');
       btn.disabled = false;
