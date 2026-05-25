@@ -4,9 +4,19 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Isaac Dossavou — Statistician & Full-Stack Developer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,300&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="icon" type="image/png" href="/faviconio-logo/logo.png"/>
   <style>
+    /* ── CAL SANS (titles) ── */
+    @font-face {
+      font-family: 'Cal Sans';
+      src: url('https://cdn.jsdelivr.net/npm/cal-sans@1.0.1/fonts/CalSans-SemiBold.woff2') format('woff2'),
+           url('https://cdn.jsdelivr.net/npm/cal-sans@1.0.1/fonts/CalSans-SemiBold.woff') format('woff');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
     /* ── TOKENS ── */
     :root {
       --bg:      #f5f5f4;
@@ -26,7 +36,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
     body {
-      font-family: 'Instrument Sans', sans-serif;
+      font-family: 'Inter', sans-serif;
       background: var(--bg);
       color: var(--white);
       overflow-x: hidden;
@@ -50,7 +60,7 @@
       border-bottom: 1px solid var(--line);
     }
     .nav-logo {
-      font-family: 'Fraunces', serif;
+      font-family: 'Cal Sans', sans-serif;
       font-size: 1rem; font-weight: 800;
       letter-spacing: -.02em; color: var(--white); text-decoration: none;
     }
@@ -69,7 +79,7 @@
     .lang-toggle { display: flex; align-items: center; gap: .5rem; }
     .lang-btn {
       background: none; border: 1px solid var(--gray2); color: var(--gray);
-      padding: .22rem .55rem; font-family: 'Instrument Sans', sans-serif;
+      padding: .22rem .55rem; font-family: 'Inter', sans-serif;
       font-size: .65rem; font-weight: 600; letter-spacing: .1em;
       text-transform: uppercase; cursor: pointer; transition: all .2s;
     }
@@ -102,7 +112,7 @@
     .mobile-menu ul li { width: 100%; text-align: center; }
     .mobile-menu ul a {
       display: block; padding: 1rem;
-      font-size: 1.15rem; font-family: 'Fraunces', serif; font-weight: 700;
+      font-size: 1.15rem; font-family: 'Cal Sans', sans-serif; font-weight: 700;
       color: var(--white); text-decoration: none; border-bottom: 1px solid var(--line);
       opacity: 0; transform: translateY(16px);
       transition: color .2s, opacity .3s, transform .3s;
@@ -118,7 +128,7 @@
       margin-top: 1.5rem; display: inline-block; padding: .9rem 2.5rem;
       background: var(--accent); color: var(--bg) !important;
       font-size: .82rem !important; font-weight: 700;
-      font-family: 'Instrument Sans', sans-serif !important;
+      font-family: 'Inter', sans-serif !important;
       letter-spacing: .08em; text-transform: uppercase; text-decoration: none;
       opacity: 0; transform: translateY(16px);
       transition: opacity .3s .3s, transform .3s .3s, background .2s !important;
@@ -133,7 +143,7 @@
     .mobile-menu.open .mob-lang { opacity: 1; transform: translateY(0); }
     .mob-lang button {
       background: none; border: 1px solid var(--gray2); color: var(--gray);
-      padding: .3rem .8rem; font-family: 'Instrument Sans', sans-serif;
+      padding: .3rem .8rem; font-family: 'Inter', sans-serif;
       font-size: .72rem; font-weight: 600; letter-spacing: .1em;
       text-transform: uppercase; cursor: pointer; transition: all .2s;
     }
@@ -183,7 +193,7 @@
     }
     .hero-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
     .hero-photo .initials {
-      font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 800;
+      font-family: 'Cal Sans', sans-serif; font-size: 2.5rem; font-weight: 800;
       color: #fff; letter-spacing: -.03em; user-select: none;
     }
     .hero-fig {
@@ -194,7 +204,7 @@
 
     /* Name */
     .hero-name {
-      font-family: 'Fraunces', serif;
+      font-family: 'Cal Sans', sans-serif;
       font-size: clamp(2.8rem, 6vw, 5.2rem);
       font-weight: 800; letter-spacing: -.04em; line-height: .95;
       margin-bottom: 1.5rem;
@@ -218,7 +228,7 @@
 
     /* Positioning statement */
     .hero-statement {
-      font-family: 'Fraunces', serif;
+      font-family: 'Cal Sans', sans-serif;
       font-size: clamp(1rem, 2.4vw, 1.38rem);
       font-weight: 300; font-style: italic;
       color: rgba(0,0,0,.55); max-width: 580px; line-height: 1.7;
@@ -242,7 +252,7 @@
       text-transform: uppercase; color: var(--gray2); display: block; margin-bottom: .45rem;
     }
     .meta-val {
-      font-family: 'Fraunces', serif;
+      font-family: 'Cal Sans', sans-serif;
       font-size: .82rem; font-weight: 700; color: var(--white); line-height: 1.45;
     }
     .meta-val.open { color: #22c55e; }
@@ -254,14 +264,14 @@
     }
     .btn-data {
       background: var(--data); color: #fff; border: none; padding: .85rem 2rem;
-      font-family: 'Instrument Sans', sans-serif; font-size: .8rem; font-weight: 700;
+      font-family: 'Inter', sans-serif; font-size: .8rem; font-weight: 700;
       letter-spacing: .06em; text-transform: uppercase; cursor: pointer; text-decoration: none;
       display: inline-flex; align-items: center; gap: .5rem; transition: transform .2s, opacity .2s;
     }
     .btn-data:hover { transform: translateY(-2px); opacity: .9; }
     .btn-dev {
       background: var(--accent); color: var(--bg); border: none; padding: .85rem 2rem;
-      font-family: 'Instrument Sans', sans-serif; font-size: .8rem; font-weight: 700;
+      font-family: 'Inter', sans-serif; font-size: .8rem; font-weight: 700;
       letter-spacing: .06em; text-transform: uppercase; cursor: pointer; text-decoration: none;
       display: inline-flex; align-items: center; gap: .5rem; transition: transform .2s, opacity .2s;
     }
@@ -281,7 +291,7 @@
     .st-label { color: var(--accent); }
 
     .section-heading {
-      font-family: 'Fraunces', serif;
+      font-family: 'Cal Sans', sans-serif;
       font-size: clamp(2rem, 4vw, 3.2rem);
       font-weight: 800; letter-spacing: -.03em; line-height: 1.1;
     }
@@ -315,7 +325,7 @@
     .profile-label.data-label { color: var(--data); }
     .profile-label.dev-label  { color: var(--accent); }
     .profile-title {
-      font-family: 'Fraunces', serif; font-size: 1.45rem; font-weight: 800;
+      font-family: 'Cal Sans', sans-serif; font-size: 1.45rem; font-weight: 800;
       letter-spacing: -.02em; margin-bottom: 1rem; color: var(--white); line-height: 1.2;
     }
     .profile-desc { font-size: .88rem; font-weight: 300; color: rgba(0,0,0,.58); line-height: 1.8; margin-bottom: 1.6rem; }
@@ -333,7 +343,7 @@
     .filter-tabs { display: flex; gap: .5rem; margin-top: 2.5rem; flex-wrap: wrap; }
     .filter-btn {
       background: var(--bg2); border: 1px solid var(--gray2); color: var(--gray);
-      padding: .45rem 1.4rem; font-family: 'Instrument Sans', sans-serif;
+      padding: .45rem 1.4rem; font-family: 'Inter', sans-serif;
       font-size: .7rem; font-weight: 600; letter-spacing: .1em;
       text-transform: uppercase; cursor: pointer; transition: all .2s;
     }
@@ -364,7 +374,7 @@
     .project-row.cta-row:hover { border-color: rgba(79,142,247,.18); }
 
     .project-num { display: flex; flex-direction: column; gap: .3rem; }
-    .num-tag { font-family: 'Fraunces', serif; font-size: .72rem; font-weight: 700; letter-spacing: .08em; color: var(--gray); }
+    .num-tag { font-family: 'Cal Sans', sans-serif; font-size: .72rem; font-weight: 700; letter-spacing: .08em; color: var(--gray); }
     .cat-tag {
       font-size: .52rem; font-weight: 700; letter-spacing: .16em;
       text-transform: uppercase; padding: .14rem .4rem; border: 1px solid;
@@ -374,7 +384,7 @@
     .proj-year { font-size: .57rem; font-weight: 600; letter-spacing: .1em; color: var(--gray2); }
 
     .project-title {
-      font-family: 'Fraunces', serif; font-size: 1.12rem; font-weight: 700;
+      font-family: 'Cal Sans', sans-serif; font-size: 1.12rem; font-weight: 700;
       color: var(--white); margin-bottom: .32rem; transition: color .2s;
     }
     .project-row[data-category="data"]:hover .project-title { color: var(--data); }
@@ -423,7 +433,7 @@
       background: rgba(79,142,247,.1); display: flex; align-items: center; justify-content: center;
     }
     .about-card-icon svg { width: 18px; height: 18px; fill: var(--accent); }
-    .about-card-title { font-family: 'Fraunces', serif; font-size: .88rem; font-weight: 700; color: var(--white); margin-bottom: .25rem; }
+    .about-card-title { font-family: 'Cal Sans', sans-serif; font-size: .88rem; font-weight: 700; color: var(--white); margin-bottom: .25rem; }
     .about-card-desc { font-size: .78rem; font-weight: 300; color: var(--gray); line-height: 1.6; }
 
     /* ── SERVICES ── */
@@ -439,10 +449,10 @@
     .service-card:hover { background: var(--bg3); }
     .service-card::before {
       content: attr(data-num); position: absolute; top: 1rem; right: 1.5rem;
-      font-family: 'Fraunces', serif; font-size: 4rem; font-weight: 800; color: rgba(0,0,0,.03);
+      font-family: 'Cal Sans', sans-serif; font-size: 4rem; font-weight: 800; color: rgba(0,0,0,.03);
     }
-    .service-price { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 800; color: var(--accent); margin-bottom: .5rem; }
-    .service-name { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: .8rem; }
+    .service-price { font-family: 'Cal Sans', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--accent); margin-bottom: .5rem; }
+    .service-name { font-family: 'Cal Sans', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: .8rem; }
     .service-desc { font-size: .82rem; font-weight: 300; color: var(--gray); line-height: 1.7; margin-bottom: 1.5rem; }
     .service-features { list-style: none; display: flex; flex-direction: column; gap: .4rem; }
     .service-features li { font-size: .78rem; font-weight: 300; color: var(--gray); display: flex; align-items: center; gap: .5rem; }
@@ -459,7 +469,7 @@
     .contact { background: var(--bg2); border-top: 1px solid var(--line); }
     .contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
     .contact-left h2 {
-      font-family: 'Fraunces', serif; font-size: clamp(2rem, 4vw, 3.5rem);
+      font-family: 'Cal Sans', sans-serif; font-size: clamp(2rem, 4vw, 3.5rem);
       font-weight: 800; letter-spacing: -.03em; line-height: 1.1; margin-bottom: 1.5rem;
     }
     .contact-left h2 span { color: var(--accent); }
@@ -479,14 +489,14 @@
     .cf-label { font-size: .6rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gray); }
     .cf-input, .cf-textarea {
       background: var(--bg3); border: 1.5px solid var(--gray2); color: var(--white);
-      padding: .75rem 1rem; font-family: 'Instrument Sans', sans-serif; font-size: .88rem;
+      padding: .75rem 1rem; font-family: 'Inter', sans-serif; font-size: .88rem;
       outline: none; transition: border-color .22s;
     }
     .cf-input:focus, .cf-textarea:focus { border-color: var(--accent); }
     .cf-textarea { resize: vertical; min-height: 110px; }
     .cf-submit {
       background: var(--accent); color: var(--bg); border: none; padding: .85rem;
-      font-family: 'Instrument Sans', sans-serif; font-size: .82rem; font-weight: 700;
+      font-family: 'Inter', sans-serif; font-size: .82rem; font-weight: 700;
       letter-spacing: .08em; text-transform: uppercase; cursor: pointer; transition: opacity .2s;
     }
     .cf-submit:hover { opacity: .85; }
@@ -501,7 +511,7 @@
       background: var(--bg2); border-top: 1px solid var(--line);
       padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between;
     }
-    .footer-logo { font-family: 'Fraunces', serif; font-size: .95rem; font-weight: 800; color: var(--white); text-decoration: none; }
+    .footer-logo { font-family: 'Cal Sans', sans-serif; font-size: .95rem; font-weight: 800; color: var(--white); text-decoration: none; }
     .footer-logo em { color: var(--accent); font-style: normal; }
     footer p { font-size: .72rem; color: var(--gray); }
     .footer-socials { display: flex; gap: 1rem; }
