@@ -374,7 +374,7 @@
         isOpen = true;
         btn.classList.add('open');
         btn.querySelector('svg').style.transform = 'rotate(180deg)';
-        btn.childNodes[2].textContent = ' Fermer';
+        btn.childNodes[2].textContent = ' Close';
 
         if (!animated) {
           animated = true;
@@ -396,7 +396,7 @@
         isOpen = false;
         btn.classList.remove('open');
         btn.querySelector('svg').style.transform = 'rotate(0deg)';
-        btn.childNodes[2].textContent = ' Découvrir';
+        btn.childNodes[2].textContent = ' Discover';
 
         [...cards].reverse().forEach((id, i) => {
           const el = document.getElementById(id);
