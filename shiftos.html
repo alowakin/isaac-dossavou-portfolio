@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShiftOS — Coming Soon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="icon" type="image/png" href="/images/logo.png"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:      #0d1117;
+      --bg2:     #161b22;
+      --bg3:     #21262d;
+      --border:  rgba(48,54,61,1);
+      --accent:  #4f8ef7;
+      --green:   #3fb950;
+      --yellow:  #d29922;
+      --red:     #f85149;
+      --white:   #e6edf3;
+      --gray:    #8b949e;
+      --gray2:   #484f58;
+    }
+    html { font-size: 16px; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .6rem 1.5rem;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    }
+    .topbar-logo {
+      display: flex; align-items: center; gap: .6rem;
+      font-size: .9rem; font-weight: 700; letter-spacing: -.01em;
+    }
+    .logo-icon {
+      width: 28px; height: 28px; border-radius: 6px;
+      background: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; font-weight: 800; color: #fff;
+    }
+    .topbar-nav { display: flex; align-items: center; gap: 1.2rem; }
+    .topbar-nav a {
+      font-size: .78rem; color: var(--gray); text-decoration: none;
+      transition: color .2s;
+    }
+    .topbar-nav a:hover { color: var(--white); }
+    .topbar-back {
+      display: flex; align-items: center; gap: .4rem;
+      font-size: .75rem; color: var(--gray);
+      text-decoration: none; transition: color .2s;
+    }
+    .topbar-back:hover { color: var(--white); }
+    .topbar-back svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* ── SIDEBAR ── */
+    .layout { display: flex; padding-top: 45px; min-height: 100vh; }
+    .sidebar {
+      width: 220px; flex-shrink: 0;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      padding: 1rem 0;
+      position: fixed; top: 45px; left: 0; bottom: 0;
+      overflow-y: auto;
+    }
+    .sidebar-section {
+      padding: .4rem 1rem .2rem;
+      font-size: .65rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--gray2);
+    }
+    .sidebar-item {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .45rem 1rem;
+      font-size: .82rem; color: var(--gray);
+      cursor: pointer; border-radius: 4px;
+      margin: .05rem .5rem;
+      transition: background .15s, color .15s;
+      position: relative;
+    }
+    .sidebar-item:hover { background: var(--bg3); color: var(--white); }
+    .sidebar-item.active { background: rgba(79,142,247,.15); color: var(--accent); }
+    .sidebar-item svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
+    .sidebar-badge {
+      margin-left: auto;
+      font-size: .6rem; font-weight: 600;
+      background: var(--gray2); color: var(--white);
+      padding: .1rem .4rem; border-radius: 8px;
+    }
+    .sidebar-badge.green { background: rgba(63,185,80,.2); color: var(--green); }
+
+    /* ── MAIN CONTENT ── */
+    .main {
+      flex: 1;
+      margin-left: 220px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 3rem 2rem;
+      min-height: calc(100vh - 45px);
+      position: relative;
+    }
+
+    /* ── MOCK SCHEDULE TABLE (blurred background) ── */
+    .mock-bg {
+      position: absolute; inset: 0;
+      overflow: hidden; pointer-events: none;
+      opacity: .18;
+      filter: blur(2px);
+    }
+    .mock-table {
+      width: 100%; border-collapse: collapse;
+      font-size: .7rem;
+    }
+    .mock-table th {
+      background: var(--bg3); border: 1px solid var(--border);
+      padding: .5rem .8rem; color: var(--gray);
+      font-weight: 500; text-align: left;
+    }
+    .mock-table td {
+      border: 1px solid var(--border); padding: .5rem .8rem;
+    }
+    .shift-chip {
+      display: inline-block; padding: .15rem .5rem;
+      border-radius: 4px; font-size: .65rem; font-weight: 600;
+    }
+    .shift-m { background: rgba(79,142,247,.2); color: var(--accent); }
+    .shift-a { background: rgba(210,153,34,.2); color: var(--yellow); }
+    .shift-n { background: rgba(63,185,80,.2); color: var(--green); }
+    .shift-o { background: rgba(136,136,136,.15); color: var(--gray); }
+
+    /* ── WIP CARD (foreground) ── */
+    .wip-card {
+      position: relative; z-index: 10;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 3rem 2.5rem;
+      max-width: 520px; width: 100%;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0,0,0,.5);
+    }
+    .wip-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .65rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase;
+      background: rgba(210,153,34,.15); color: var(--yellow);
+      border: 1px solid rgba(210,153,34,.3);
+      padding: .3rem .8rem; border-radius: 100px;
+      margin-bottom: 1.8rem;
+    }
+    .wip-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--yellow);
+      animation: blink 1.4s ease infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+    .wip-icon {
+      width: 72px; height: 72px; border-radius: 16px;
+      background: rgba(79,142,247,.12);
+      border: 1px solid rgba(79,142,247,.2);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    .wip-icon svg { width: 36px; height: 36px; fill: var(--accent); }
+
+    .wip-title {
+      font-size: 1.8rem; font-weight: 700;
+      letter-spacing: -.03em; margin-bottom: .5rem;
+    }
+    .wip-title em { color: var(--accent); font-style: normal; }
+    .wip-subtitle {
+      font-size: .85rem; color: var(--gray); margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    /* Progress bar */
+    .progress-wrap { margin-bottom: 2rem; text-align: left; }
+    .progress-label {
+      display: flex; justify-content: space-between;
+      font-size: .75rem; color: var(--gray); margin-bottom: .5rem;
+    }
+    .progress-label span:last-child { color: var(--accent); font-weight: 600; }
+    .progress-track {
+      height: 6px; background: var(--bg3); border-radius: 100px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; border-radius: 100px;
+      background: linear-gradient(90deg, var(--accent), #7eb3ff);
+      width: 68%;
+      animation: grow 1.4s ease forwards;
+    }
+    @keyframes grow { from { width: 0% } to { width: 68% } }
+
+    /* Features grid */
+    .features {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: .6rem; margin-bottom: 2rem; text-align: left;
+    }
+    .feat {
+      display: flex; align-items: flex-start; gap: .5rem;
+      font-size: .78rem; color: var(--gray);
+    }
+    .feat-dot {
+      width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: .05rem;
+    }
+    .feat-dot svg { width: 11px; height: 11px; }
+    .feat-dot.done { background: rgba(63,185,80,.15); }
+    .feat-dot.done svg { fill: var(--green); }
+    .feat-dot.wip  { background: rgba(79,142,247,.15); }
+    .feat-dot.wip  svg { fill: var(--accent); }
+    .feat-dot.todo { background: rgba(136,136,136,.12); }
+    .feat-dot.todo svg { fill: var(--gray2); }
+
+    /* CTA buttons */
+    .wip-actions { display: flex; gap: .8rem; justify-content: center; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .7rem 1.4rem;
+      background: var(--accent); color: #fff;
+      border-radius: 8px; text-decoration: none;
+      font-size: .82rem; font-weight: 600;
+      transition: background .2s, transform .2s;
+    }
+    .btn-primary:hover { background: #3778e5; transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .7rem 1.4rem;
+      background: transparent; color: var(--gray);
+      border: 1px solid var(--border);
+      border-radius: 8px; text-decoration: none;
+      font-size: .82rem; font-weight: 500;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-secondary:hover { border-color: var(--gray); color: var(--white); }
+    .btn-primary svg, .btn-secondary svg { width: 15px; height: 15px; fill: currentColor; }
+
+    @media (max-width: 700px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .features { grid-template-columns: 1fr; }
+      .wip-card { padding: 2rem 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-logo">
+      <div class="logo-icon">S</div>
+      ShiftOS
+    </div>
+    <nav class="topbar-nav">
+      <a href="#">Dashboard</a>
+      <a href="#">Schedules</a>
+      <a href="#">Agents</a>
+      <a href="#">Reports</a>
+    </nav>
+    <a href="index.html" class="topbar-back">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      Back to Portfolio
+    </a>
+  </div>
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-section">Workspace</div>
+      <div class="sidebar-item active">
+        <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+        Dashboard
+      </div>
+      <div class="sidebar-item">
+        <svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+        Schedules
+        <span class="sidebar-badge green">Live</span>
+      </div>
+      <div class="sidebar-item">
+        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        Agents
+        <span class="sidebar-badge">24</span>
+      </div>
+      <div class="sidebar-item">
+        <svg viewBox="0 0 24 24"><path d="M9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4zm2.5 2.1h-15V5h15v14.1zm0-16.1h-15c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+        Reports
+      </div>
+      <div class="sidebar-item">
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+        Messages
+        <span class="sidebar-badge">3</span>
+      </div>
+      <div class="sidebar-section" style="margin-top:1rem">Settings</div>
+      <div class="sidebar-item">
+        <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 9.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+        Settings
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- Blurred mock schedule (background) -->
+      <div class="mock-bg">
+        <table class="mock-table">
+          <thead>
+            <tr>
+              <th>Agent</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Sarah M.</td><td><span class="shift-chip shift-m">08:00–16:00</span></td><td><span class="shift-chip shift-m">08:00–16:00</span></td><td><span class="shift-chip shift-o">OFF</span></td><td><span class="shift-chip shift-a">14:00–22:00</span></td><td><span class="shift-chip shift-m">08:00–16:00</span></td><td><span class="shift-chip shift-o">OFF</span></td><td><span class="shift-chip shift-n">22:00–06:00</span></td></tr>
+            <tr><td>James K.</td><td><span class="shift-chip shift-a">14:00–22:00</span></td><td><span class="shift-chip shift-o">OFF</span></td><td><span class="shift-chip shift-m">08:00–16:00</span></td><td><span class="shift-chip shift-m">08:00–16:00</span></td><td><span class="shift-chip shift-o">OFF</span></td><td><span class="shift-chip shift-a">14:00–22:00</span></td><td><span class="shift-chip shift-m">08:00–16:00</span></td></tr>
+            <tr><td>Amara T.</td><td><span class="shift-chip shift-n">22:00–06:00</span></td><td><span class="shift-chip shift-a">14:00–22:00</span></td><td><span class="shift-chip shift-a">14:00–22:00</span></td><td><span class="shift-chip shift-o">OFF</span></td><td><span class="shift-chip shift-m">08:00–16:00</span></td><td><span class="shift-chip shift-m">08:00–16:00</span></td><td><span class="shift-chip shift-o">OFF</span></td></tr>
+            <tr><td>Lucas P.</td><td><span class="shift-chip shift-o">OFF</span></td><td><span class="shift-chip shift-n">22:00–06:00</span></td><td><span class="shift-chip shift-n">22:00–06:00</span></td><td><span class="shift-chip shift-m">08:00–16:00</span></td><td><span class="shift-chip shift-a">14:00–22:00</span></td><td><span class="shift-chip shift-o">OFF</span></td><td><span class="shift-chip shift-m">08:00–16:00</span></td></tr>
+            <tr><td>Nadia C.</td><td><span class="shift-chip shift-m">08:00–16:00</span></td><td><span class="shift-chip shift-m">08:00–16:00</span></td><td><span class="shift-chip shift-a">14:00–22:00</span></td><td><span class="shift-chip shift-n">22:00–06:00</span></td><td><span class="shift-chip shift-o">OFF</span></td><td><span class="shift-chip shift-m">08:00–16:00</span></td><td><span class="shift-chip shift-a">14:00–22:00</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- WIP CARD (foreground) -->
+      <div class="wip-card">
+        <div class="wip-badge">In Development</div>
+
+        <div class="wip-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+        </div>
+
+        <div class="wip-title">Shift<em>OS</em></div>
+        <div class="wip-subtitle">
+          Workforce management platform for call centers.<br/>
+          Smart scheduling, 3 user roles, real-time notifications.
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-label">
+            <span>Development progress</span>
+            <span>68%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+
+        <div class="features">
+          <div class="feat">
+            <div class="feat-dot done">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+            Auth &amp; 3 user roles
+          </div>
+          <div class="feat">
+            <div class="feat-dot done">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+            Supabase + RLS policies
+          </div>
+          <div class="feat">
+            <div class="feat-dot done">
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+            Schedule generation algo
+          </div>
+          <div class="feat">
+            <div class="feat-dot wip">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+            </div>
+            Admin dashboard UI
+          </div>
+          <div class="feat">
+            <div class="feat-dot wip">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+            </div>
+            Real-time notifications
+          </div>
+          <div class="feat">
+            <div class="feat-dot todo">
+              <svg viewBox="0 0 24 24"><path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"/></svg>
+            </div>
+            Mobile responsive
+          </div>
+        </div>
+
+        <div class="wip-actions">
+          <a href="index.html" class="btn-secondary">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            Back to Portfolio
+          </a>
+          <a href="get-in-touch.html" class="btn-primary">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            Get notified at launch
+          </a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+</body>
+</html>
