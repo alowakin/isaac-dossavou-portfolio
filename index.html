@@ -170,6 +170,28 @@
   </div>
 </section>
 
+<!-- ══ VALUE STRIP ══ -->
+<section class="value-strip">
+  <div class="value-strip-inner reveal">
+    <div class="value-item">
+      <span class="value-number">5+</span>
+      <span class="value-label" data-en="data projects" data-fr="projets data">data projects</span>
+    </div>
+    <div class="value-item">
+      <span class="value-number">7+</span>
+      <span class="value-label" data-en="web builds" data-fr="sites web">web builds</span>
+    </div>
+    <div class="value-item">
+      <span class="value-number">24h</span>
+      <span class="value-label" data-en="reply time" data-fr="réponse">reply time</span>
+    </div>
+    <div class="value-item">
+      <span class="value-number">100%</span>
+      <span class="value-label" data-en="custom work" data-fr="sur mesure">custom work</span>
+    </div>
+  </div>
+</section>
+
 <!-- ══ [01] PROFILES ══ -->
 <section class="profiles section" id="profiles">
   <div class="section-inner">
@@ -358,7 +380,7 @@
         <div class="project-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></div>
       </a>
 
-      <a href="shiftos.html" class="project-row" data-category="dev">
+      <a href="https://shift-os.app" target="_blank" rel="noopener" class="project-row" data-category="dev">
         <div class="project-num">
           <span class="num-tag">W02</span>
           <span class="cat-tag dev" data-en="Dev" data-fr="Dev">Dev</span>
@@ -547,33 +569,40 @@
 
     <div class="reveal" style="transition-delay:.15s">
       <div class="contact-form" id="contactForm">
-        <div class="cf-group">
-          <label class="cf-label" data-en="Your Name" data-fr="Votre nom">Your Name</label>
-          <input class="cf-input" type="text" id="cfName" placeholder="John Doe"/>
+        <div class="cf-row">
+          <div class="cf-group">
+            <label class="cf-label" data-en="Your Name" data-fr="Votre nom">Your Name</label>
+            <input class="cf-input" type="text" id="cfName" placeholder="John Doe" required/>
+          </div>
+          <div class="cf-group">
+            <label class="cf-label" data-en="Email Address" data-fr="Adresse email">Email Address</label>
+            <input class="cf-input" type="email" id="cfEmail" placeholder="john@company.com" required/>
+          </div>
         </div>
-        <div class="cf-group">
-          <label class="cf-label" data-en="Email Address" data-fr="Adresse email">Email Address</label>
-          <input class="cf-input" type="email" id="cfEmail" placeholder="john@company.com"/>
+
+        <div class="cf-row">
+          <div class="cf-group">
+            <label class="cf-label" data-en="Phone Number" data-fr="Numéro de téléphone">Phone Number</label>
+            <input class="cf-input" type="tel" id="cfPhone" placeholder="+1 (555) 000-0000"/>
+          </div>
+          <div class="cf-group">
+            <label class="cf-label" data-en="Project Type" data-fr="Type de projet">Project Type</label>
+            <select class="cf-input" id="cfType" style="appearance:none">
+              <option data-en="Starter — $400"              data-fr="Démarrage — 400$">Starter — $400</option>
+              <option data-en="Business — $900"             data-fr="Business — 900$">Business — $900</option>
+              <option data-en="Premium — $1,800+"           data-fr="Premium — 1 800$+">Premium — $1,800+</option>
+              <option data-en="Data Analysis / Statistics"  data-fr="Analyse de données / Statistiques">Data Analysis / Statistics</option>
+              <option data-en="Not sure yet"                data-fr="Pas encore sûr">Not sure yet</option>
+            </select>
+          </div>
         </div>
-        <div class="cf-group">
-          <label class="cf-label" data-en="Phone Number" data-fr="Numéro de téléphone">Phone Number</label>
-          <input class="cf-input" type="tel" id="cfPhone" placeholder="+1 (555) 000-0000"/>
-        </div>
-        <div class="cf-group">
-          <label class="cf-label" data-en="Project Type" data-fr="Type de projet">Project Type</label>
-          <select class="cf-input" id="cfType" style="appearance:none">
-            <option data-en="Starter — $400"              data-fr="Démarrage — 400$">Starter — $400</option>
-            <option data-en="Business — $900"             data-fr="Business — 900$">Business — $900</option>
-            <option data-en="Premium — $1,800+"           data-fr="Premium — 1 800$+">Premium — $1,800+</option>
-            <option data-en="Data Analysis / Statistics"  data-fr="Analyse de données / Statistiques">Data Analysis / Statistics</option>
-            <option data-en="Not sure yet"                data-fr="Pas encore sûr">Not sure yet</option>
-          </select>
-        </div>
+
         <div class="cf-group">
           <label class="cf-label" data-en="Tell me about your project" data-fr="Parlez-moi de votre projet">Tell me about your project</label>
-          <textarea class="cf-textarea" id="cfMsg" placeholder="What do you need? What's your timeline?"></textarea>
+          <textarea class="cf-textarea" id="cfMsg" placeholder="What do you need? What's your timeline?" required></textarea>
         </div>
-        <button class="cf-submit" onclick="submitContact()">
+
+        <button class="cf-submit" onclick="submitContact()" type="button">
           <span data-en="Send Message" data-fr="Envoyer">Send Message</span>
         </button>
       </div>
