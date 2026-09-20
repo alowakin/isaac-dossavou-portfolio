@@ -93,13 +93,7 @@
     /* PROFILE */
     .profile {
       text-align: center; margin-bottom: 3rem;
-      opacity: 1; transform: translateY(0);
-    }
-    @media (prefers-reduced-motion: no-preference) {
-      .profile {
-        opacity: 0; transform: translateY(24px);
-        animation: slideUp .6s .1s ease forwards;
-      }
+      opacity: 1; animation: slideIn .6s .1s ease both;
     }
     .avatar {
       width: 88px; height: 88px; border-radius: 50%;
@@ -135,14 +129,8 @@
 
     /* TOGGLE BUTTON */
     .toggle-wrap {
-      opacity: 1; transform: translateY(0);
-      margin-bottom: 2rem;
-    }
-    @media (prefers-reduced-motion: no-preference) {
-      .toggle-wrap {
-        opacity: 0; transform: translateY(20px);
-        animation: slideUp .5s .35s ease forwards;
-      }
+      opacity: 1; margin-bottom: 2rem;
+      animation: slideIn .5s .35s ease both;
     }
     .btn-toggle {
       font-family: 'Manrope', sans-serif;
@@ -242,6 +230,10 @@
     @keyframes slideUp {
       to { opacity: 1; transform: translateY(0); }
     }
+    @keyframes slideIn {
+      from { transform: translateY(24px); }
+      to { transform: translateY(0); }
+    }
     .link-card.show, .separator.show {
       animation: slideUp .45s ease forwards;
     }
@@ -249,10 +241,7 @@
     /* FOOTER */
     .dig-footer {
       margin-top: 3rem; text-align: center;
-      opacity: 1;
-    }
-    @media (prefers-reduced-motion: no-preference) {
-      .dig-footer { opacity: 0; animation: slideUp .5s 1.6s ease forwards; }
+      opacity: 1; animation: slideIn .5s 1.6s ease both;
     }
     .dig-footer p { font-size: .75rem; color: var(--gray2); }
     .dig-footer a { color: var(--gray); text-decoration: none; transition: color .2s; }
